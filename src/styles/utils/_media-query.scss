@@ -1,0 +1,63 @@
+$devices-widths: (
+  phone-sm: 481px,
+  phone: 601px,
+  tablet-pt: 769px,
+  tablet-ld: 901px,
+  laptop: 1241px,
+  desktop: 1367px,
+  desktop-lg: 1801px,
+);
+
+@mixin for-small-phones {
+  @media (max-width: map-get($devices-widths, phone-sm)) {
+    @content;
+  }
+}
+
+@mixin for-phones {
+  @media (max-width: map-get($devices-widths, phone)) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait {
+  @media (max-width: map-get($devices-widths, tablet-pt)) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape {
+  @media (max-width: map-get($devices-widths, tablet-ld)) {
+    @content;
+  }
+}
+
+@mixin for-mobile {
+  @include for-tablet-landscape {
+    @content;
+  }
+}
+
+@mixin for-laptop {
+  @media (max-width: map-get($devices-widths, laptop)) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (max-width: map-get($devices-widths, desktop)) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop {
+  @media (max-width: map-get($devices-widths, desktop-lg)) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop-up {
+  @media (min-width: (map-get($devices-widths, desktop-lg) + 1)) {
+    @content;
+  }
+}

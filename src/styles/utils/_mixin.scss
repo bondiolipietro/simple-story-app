@@ -1,0 +1,80 @@
+// Size
+
+@mixin size($width: auto, $height: $width) {
+  min-width: $width;
+  min-height: $height;
+}
+
+// Flexbox/Grid Mixins
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-container($direction, $justify: stretch, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin default-grid-container($rows: auto) {
+  @include grid-container(12, $rows);
+}
+
+@mixin grid-container($columns, $rows: auto) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+}
+
+@mixin grid-content-position($justify, $align) {
+  justify-content: $justify;
+  align-content: $align;
+}
+
+@mixin spacing($justify: stretch, $align: stretch) {
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin spacing-center {
+  @include spacing(center, center);
+}
+
+@mixin gap($gap: 0, $row-gap: 0) {
+  gap: $gap;
+  row-gap: $row-gap;
+}
+
+// Resets
+
+@mixin reset-link {
+  text-decoration: none;
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+@mixin reset-button {
+  background: none;
+  border: none;
+}
+
+// Link Mixins
+
+@mixin link-color($color, $color-on-hover: $color) {
+  color: $color;
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: $color-on-hover;
+  }
+}
