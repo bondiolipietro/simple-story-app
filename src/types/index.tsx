@@ -43,9 +43,9 @@ export type IStoryImage = IMediaContent & {
 };
 
 export enum ISize {
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
 }
 
 export type IAuthInfo = {
@@ -62,7 +62,7 @@ export type IUserInfo = {
   avatar: IUserAvatar;
 };
 
-export type IUserPreview = Pick<IUserInfo, "id" | "name" | "avatar">;
+export type IUserPreview = Pick<IUserInfo, 'id' | 'name' | 'avatar'>;
 
 export type IUserAvatar = IMediaContent;
 
@@ -73,7 +73,7 @@ export type ILoginForm = {
 
 export type ISignUpForm = Omit<
   IUserInfo,
-  "id" | "description" | "secondaryEmail"
+  'id' | 'description' | 'secondaryEmail'
 > & {
   password: string;
   confirmPassword: string;

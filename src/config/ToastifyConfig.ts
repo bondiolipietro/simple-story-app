@@ -1,4 +1,4 @@
-import { toast, ToastContainerProps } from "react-toastify";
+import { toast, ToastContainerProps } from 'react-toastify';
 
 const ToastifyConfig: ToastContainerProps = {
   position: toast.POSITION.TOP_RIGHT,
@@ -8,7 +8,7 @@ const ToastifyConfig: ToastContainerProps = {
   pauseOnHover: true,
   draggable: true,
   limit: 5,
-  theme: "colored",
+  theme: 'colored',
 };
 
 export { ToastifyConfig };

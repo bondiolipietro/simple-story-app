@@ -1,6 +1,6 @@
-import { BlipChatConfig } from "../../config/BlipChatConfig";
+import { BlipChatConfig } from '../../config/BlipChatConfig';
 
-const { BlipChat } = require("blip-chat-widget");
+const { BlipChat } = require('blip-chat-widget');
 
 const blipchat = () => {
   const blipChat = new BlipChat()
