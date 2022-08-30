@@ -1,46 +1,50 @@
 export type IStory = {
-  id: string;
-  title: string;
-  views: number;
-  frames: Array<IStoryFrame>;
+  id: string
+  frames: Array<IStoryFrame>
   info: {
-    title: string;
-    description: string;
-    image: IImageContent;
-    author: IUserPreview;
-    private: boolean;
-  };
+    title: string
+    description: string
+    image: IImageContent
+    authorId: string
+    private: boolean
+  }
   analytics: {
-    views: number;
-  };
-};
+    views: number
+  }
+}
+
+export type IStoryPreview = Pick<IStory, 'id' | 'info' | 'analytics'>
+
+export type IStoryCreateRequest = Pick<IStory, 'frames' | 'info'>
+
+export type IStoryUpdateRequest = Partial<IStoryCreateRequest>
 
 export type IMediaContent = {
-  id: string;
-  title: string;
-  url: string;
-  alt: string;
-};
+  id: string
+  title: string
+  url: string
+  alt: string
+}
 
-export type IImageContent = IMediaContent;
+export type IImageContent = IMediaContent
 
 export type IStoryFrame = {
-  title: string;
-  content: Array<IStoryFrameParagraph>;
-  notes: Array<string>;
-};
+  title: string
+  content: Array<IStoryFrameParagraph>
+  notes: Array<string>
+}
 
 export type IStoryFrameParagraph = {
-  content: string;
-  audio: IStoryAudio;
-  images: Array<IStoryImage>;
-};
+  content: string
+  audio: IStoryAudio
+  images: Array<IStoryImage>
+}
 
-export type IStoryAudio = IMediaContent;
+export type IStoryAudio = IMediaContent
 
 export type IStoryImage = IMediaContent & {
-  size: ISize;
-};
+  size: ISize
+}
 
 export enum ISize {
   SMALL = 'small',
@@ -49,36 +53,31 @@ export enum ISize {
 }
 
 export type IAuthInfo = {
-  user: IUserInfo;
-};
+  user: IUserInfo
+}
 
 export type IUserInfo = {
-  id: string;
-  name: string;
-  nickname: string;
-  description?: string;
-  email: string;
-  secondaryEmail?: string;
-  avatar: IUserAvatar;
-};
+  id: string
+  name: string
+  nickname: string
+  description?: string
+  email: string
+  secondaryEmail?: string
+  avatar: IUserAvatar
+}
 
-export type IUserPreview = Pick<IUserInfo, 'id' | 'name' | 'avatar'>;
+export type IUserPreview = Pick<IUserInfo, 'id' | 'name' | 'nickname' | 'description' | 'avatar'>
 
-export type IUserAvatar = IMediaContent;
+export type IUserAvatar = IMediaContent
 
 export type ILoginForm = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
-export type ISignUpForm = Omit<
-  IUserInfo,
-  'id' | 'description' | 'secondaryEmail'
-> & {
-  password: string;
-  confirmPassword: string;
-};
+export type IUserCreateRequest = Omit<IUserInfo, 'id' | 'description' | 'secondaryEmail'> & {
+  password: string
+  confirmPassword: string
+}
 
-export type IRecoverAccessForm = {
-  email: string;
-};
+export type IUserUpdateRequest = Partial<IUserInfo>
