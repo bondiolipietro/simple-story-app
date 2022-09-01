@@ -1,21 +1,31 @@
-import { AppConfig } from '../config/AppConfig';
+import { AppConfig } from '../config/AppConfig'
 
 class AppRoutes {
-  public static ANY = '*';
+  public static ANY = '*'
 
-  public static BASE = AppConfig.APP_BASE_PATH;
+  public static HOME = '/home'
 
-  public static HOME = '/home';
+  public static ABOUT = '/about'
 
-  public static LOGIN = '/login';
+  public static LOGIN = '/login'
 
-  public static RECOVER_ACCESS = '/recover-access';
+  public static SIGNUP = '/signup'
 
-  public static SIGNUP = '/signup';
+  public static RECOVER_ACCESS = '/recover-access'
 
-  public static USER_AREA = '/user-area';
+  public static USER_PROFILE = '/user/:id/profile'
 
-  public static PRIVACY_POLICY = '/privacy-policy';
+  public static USER_PROFILE_EDIT = '/user/:id/profile/edit'
+
+  public static STORY = '/story/:id'
+
+  public static STORY_SHARED = '/story/shared'
+
+  public static STORY_CREATE = '/story/create'
+
+  public static STORY_EDIT = '/story/:id/edit'
+
+  public static PRIVACY_POLICY = '/privacy-policy'
 }
 
-export { AppRoutes };
+export { AppRoutes }
