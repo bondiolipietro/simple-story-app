@@ -1,7 +1,7 @@
-import { AppConfig } from '../config/AppConfig'
-
 class AppRoutes {
   public static ANY = '*'
+
+  public static BASE = '/'
 
   public static HOME = '/home'
 

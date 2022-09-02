@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppConfig } from '../config/AppConfig'
 import { AppRoutes } from '../constants/AppRoutes'
@@ -22,6 +22,7 @@ function AppRouter() {
     <BrowserRouter basename={`${AppConfig.APP_BASE_PATH}`}>
       <Routes>
         <Route path={AppRoutes.ANY} element={<NotFound />}></Route>
+        <Route path={AppRoutes.BASE} element={<Navigate to={AppRoutes.HOME} replace />}></Route>
         <Route path={AppRoutes.HOME} element={<Home />}></Route>
         <Route path={AppRoutes.ABOUT} element={<About />}></Route>
         <Route path={AppRoutes.LOGIN} element={<Login />}></Route>

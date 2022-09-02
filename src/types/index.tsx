@@ -1,3 +1,16 @@
+import { PersistPartial } from 'redux-persist/lib/persistReducer'
+
+export type IRootState = {
+  authState: IAuthState & PersistPartial
+}
+
+export type IAuthState = {
+  user?: IUserInfo
+  authToken?: string
+  isAuthenticated: boolean
+  error?: Error
+}
+
 export type IStory = {
   id: string
   frames: Array<IStoryFrame>
