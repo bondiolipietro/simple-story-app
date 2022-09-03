@@ -1,0 +1,33 @@
+* {
+  font-family: "Play", sans-serif !important;
+  box-sizing: border-box;
+  transition: all 100ms ease-in-out;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+p {
+  margin: 0 !important;
+}
+
+input,
+input:focus-visible,
+textarea,
+textarea:focus-visible {
+  outline: none;
+  border: none;
+}
+
+button {
+  border: none;
+}

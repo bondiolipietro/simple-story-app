@@ -1,0 +1,29 @@
+@use '../../styles/utils/mixin' as m;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-top: 1px solid #ccc;
+}
+
+.social-media {
+  display: flex;
+  gap: 1rem;
+  &__link {
+    @include m.reset-link;
+    svg {
+      width: 1.7rem;
+      height: 1.7rem;
+      color: black;
+    }
+    &:hover {
+      svg {
+        color: #9affa2;
+      }
+    }
+  }
+}

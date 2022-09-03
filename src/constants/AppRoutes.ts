@@ -13,9 +13,13 @@ class AppRoutes {
 
   public static RECOVER_ACCESS = '/recover-access'
 
-  public static USER_PROFILE = '/user/:id/profile'
+  public static MY_PROFILE = '/my-profile'
 
-  public static USER_PROFILE_EDIT = '/user/:id/profile/edit'
+  public static MY_PROFILE_EDIT = '/my-profile/edit'
+
+  public static MY_STORIES = '/my-stories'
+
+  public static USER_PROFILE = '/user/:id/profile'
 
   public static STORY = '/story/:id'
 

@@ -1,16 +1,17 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Cache from 'i18next-localstorage-cache';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import Cache from 'i18next-localstorage-cache'
+import LanguageDetector from 'i18next-browser-languagedetector'
 
-import translation from './en/translation.json';
-import { i18nConfig } from '../../config/i18nConfig';
+import translation from './en/translation.json'
+
+import { i18nConfig } from '../../config/i18nConfig'
 
 export const resources = {
   en: {
     translation,
   },
-};
+}
 
 i18n
   .use(Cache)
@@ -27,6 +28,6 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-  });
+  })
 
-export default i18n;
+export default i18n
