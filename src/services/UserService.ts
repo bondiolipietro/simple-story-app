@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios'
 
+import { ServiceBase } from './base/ServiceBase'
+
 import { AppConfig } from '../config/AppConfig'
 import { IUserCreateRequest, IUserInfo, IUserPreview, IUserUpdateRequest } from '../types'
-
-import { ServiceBase } from './base/ServiceBase'
 
 class UserService extends ServiceBase {
   constructor() {
@@ -41,12 +41,33 @@ class UserService extends ServiceBase {
     return response
   }
 
-  public async getUserInfo(id: string, authToken: string): Promise<AxiosResponse> {
-    const response = await this.http.get<IUserInfo>(`/${id}/info`, {
-      headers: { Authorization: `Bearer ${authToken}` },
-    })
+  public async getUserInfo(id: string, authToken: string): Promise<AxiosResponse<IUserInfo>> {
+    // const response = await this.http.get<IUserInfo>(`/${id}/info`, {
+    //   headers: { Authorization: `Bearer ${authToken}` },
+    // })
 
-    return response
+    const mock = {
+      status: 200,
+      statusText: '200',
+      headers: {},
+      config: {},
+      data: {
+        id: '1',
+        name: 'Pietro Bondioli',
+        nickname: 'pietro',
+        description: 'description',
+        email: 'pietrobondiolipessoal@gmail.com',
+        secondaryEmail: 'pietrobondiolipessoal@gmail.com',
+        avatar: {
+          id: '1',
+          title: 'avatar',
+          url: 'https://cdn-icons-png.flaticon.com/512/4712/4712206.png',
+          alt: 'avatar',
+        },
+      },
+    }
+
+    return mock
   }
 
   public async getUserPreview(id: string): Promise<AxiosResponse> {

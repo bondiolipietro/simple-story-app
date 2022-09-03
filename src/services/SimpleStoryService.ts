@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios'
 
+import { ServiceBase } from './base/ServiceBase'
+
 import { AppConfig } from '../config/AppConfig'
 import { IStory, IStoryCreateRequest, IStoryPreview, IStoryUpdateRequest } from '../types'
-
-import { ServiceBase } from './base/ServiceBase'
 
 class SimpleStoryService extends ServiceBase {
   constructor() {
@@ -41,6 +41,39 @@ class SimpleStoryService extends ServiceBase {
     const response = await this.http.get<IStoryPreview>(`/${id}/preview`)
 
     return response
+  }
+
+  public async getPublicStoriesPreview(): Promise<AxiosResponse<IStoryPreview[]>> {
+    // const response = await this.http.get<IStoryPreview[]>('/public/preview')
+
+    const mock = {
+      status: 200,
+      statusText: '200',
+      headers: {},
+      config: {},
+      data: [
+        {
+          id: '1',
+          info: {
+            title: 'story 1',
+            description: 'description',
+            image: {
+              id: '1',
+              title: 'story preview image',
+              url: 'https://images.unsplash.com/photo-1662103185262-b0b11b0f3008?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
+              alt: 'cavalo',
+            },
+            authorId: '1',
+            private: false,
+          },
+          analytics: {
+            views: 1,
+          },
+        },
+      ],
+    }
+
+    return mock
   }
 
   public async getStoriesPreviewByUserId(

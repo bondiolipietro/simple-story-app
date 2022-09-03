@@ -1,0 +1,29 @@
+@use '../../styles/utils/mixin' as m;
+
+.home {
+  @include m.flex-container(column);
+  padding: 4rem 6rem;
+  gap: 3rem;
+}
+
+.presentation {
+  @include m.flex-center(row);
+  gap: 4rem;
+
+  &__img {
+    width: 256px;
+    border-radius: 50%;
+  }
+}
+
+.public-stories {
+  @include m.flex-container(column);
+  gap: 2rem;
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  &__list {
+    @include m.grid-container(repeat(auto-fill, minmax(256px, 1fr)));
+  }
+}
