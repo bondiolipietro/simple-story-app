@@ -1,0 +1,28 @@
+@use '../../../styles/utils/mixin' as m;
+
+.art {
+  @include m.flex-center;
+  padding: 2rem 4rem;
+}
+
+.small {
+  width: 128px;
+  height: 128px;
+}
+
+.medium {
+  width: 256px;
+  height: 256px;
+}
+
+.large {
+  width: 512px;
+  height: 512px;
+}
+
+.small,
+.medium,
+.large {
+  object-fit: cover;
+  object-position: center;
+}

@@ -1,0 +1,6 @@
+@use '../../styles/utils/mixin' as m;
+
+.story {
+  display: grid;
+  grid-template-columns: 4fr 6fr 2fr;
+}

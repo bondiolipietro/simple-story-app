@@ -49,7 +49,7 @@ export type IStoryFrame = {
 
 export type IStoryFrameParagraph = {
   content: string
-  audio: IStoryAudio
+  audio?: IStoryAudio
   images: Array<IStoryImage>
 }
 

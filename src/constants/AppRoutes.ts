@@ -30,6 +30,8 @@ class AppRoutes {
   public static STORY_EDIT = '/story/:id/edit'
 
   public static PRIVACY_POLICY = '/privacy-policy'
+
+  public static ERROR = '/error'
 }
 
 export { AppRoutes }

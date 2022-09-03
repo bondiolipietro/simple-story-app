@@ -1,7 +1,12 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+
+import { StoryComp } from '../../components/StoryComp'
 
 function Story() {
-  return <div>Story</div>
+  const { id } = useParams()
+
+  return <StoryComp id={id!} />
 }
 
 export { Story }

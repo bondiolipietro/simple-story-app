@@ -19,6 +19,7 @@ import { StoryShared } from '../pages/StoryShared'
 import { PrivacyPolicy } from '../pages/PrivacyPolicy'
 import { MyStories } from '../pages/MyStories'
 import { HomeLayout } from '../components/HomeLayout'
+import { ErrorPage } from '../pages/ErrorPage'
 
 function AppRouter() {
   return (
@@ -29,6 +30,7 @@ function AppRouter() {
         <Route element={<HomeLayout />}>
           <Route path={AppRoutes.HOME} element={<Home />}></Route>
           <Route path={AppRoutes.ABOUT} element={<About />}></Route>
+          <Route path={AppRoutes.ERROR} element={<ErrorPage />}></Route>
           <Route path={AppRoutes.LOGIN} element={<Login />}></Route>
           <Route path={AppRoutes.SIGNUP} element={<Signup />}></Route>
           <Route path={AppRoutes.MY_STORIES} element={<MyStories />}></Route>
@@ -36,12 +38,12 @@ function AppRouter() {
           <Route path={AppRoutes.MY_PROFILE_EDIT} element={<MyProfileEdit />}></Route>
           <Route path={AppRoutes.RECOVER_ACCESS} element={<RecoverAccess />}></Route>
           <Route path={AppRoutes.USER_PROFILE} element={<UserProfile />} />
+          <Route path={AppRoutes.STORY} element={<Story />} />
+          <Route path={AppRoutes.STORY_SHARED} element={<StoryShared />} />
           <Route path={AppRoutes.STORY_CREATE} element={<StoryCreate />} />
           <Route path={AppRoutes.STORY_EDIT} element={<StoryEdit />} />
           <Route path={AppRoutes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
         </Route>
-        <Route path={AppRoutes.STORY} element={<Story />} />
-        <Route path={AppRoutes.STORY_SHARED} element={<StoryShared />} />
       </Routes>
     </BrowserRouter>
   )
