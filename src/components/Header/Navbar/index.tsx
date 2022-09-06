@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 import style from './style.module.scss'
 
@@ -8,27 +9,43 @@ import { AppRoutes } from '../../../constants/AppRoutes'
 import { getAuth } from '../../../store/selectors'
 
 function Navbar() {
-  const authState = useSelector(getAuth)
+  const { isAuthenticated } = useSelector(getAuth)
+
+  const authenticatedMenus = [
+    {
+      text: 'My Stories',
+      path: AppRoutes.MY_STORIES,
+    },
+    {
+      text: 'New Story',
+      path: AppRoutes.STORY_CREATE,
+    },
+    {
+      text: 'My Profile',
+      path: AppRoutes.MY_PROFILE,
+    },
+    {
+      text: <RiLogoutBoxRLine />,
+      path: AppRoutes.LOGOUT,
+    },
+  ]
+
+  const unauthenticatedMenus = [
+    {
+      text: 'Login',
+      path: AppRoutes.LOGIN,
+    },
+  ]
+
+  const currentMenuList = isAuthenticated ? authenticatedMenus : unauthenticatedMenus
 
   return (
     <nav className={style['navbar']}>
-      {authState.isAuthenticated ? (
-        <>
-          <Link className={style['navbar__item']} to={AppRoutes.MY_STORIES}>
-            My Stories
-          </Link>
-          <Link className={style['navbar__item']} to={AppRoutes.STORY_CREATE}>
-            New Story
-          </Link>
-          <Link className={style['navbar__item']} to={AppRoutes.MY_PROFILE}>
-            My Profile
-          </Link>
-        </>
-      ) : (
-        <Link className={style['navbar__item']} to={AppRoutes.LOGIN}>
-          Login
+      {currentMenuList.map((menu) => (
+        <Link key={menu.path} className={style['navbar__item']} to={menu.path}>
+          {menu.text}
         </Link>
-      )}
+      ))}
     </nav>
   )
 }

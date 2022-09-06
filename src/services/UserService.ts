@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios'
 
 import { ServiceBase } from './base/ServiceBase'
+import { testData } from './test_data'
 
 import { AppConfig } from '../config/AppConfig'
 import { IUserCreateRequest, IUserInfo, IUserPreview, IUserUpdateRequest } from '../types'
@@ -46,26 +47,7 @@ class UserService extends ServiceBase {
     //   headers: { Authorization: `Bearer ${authToken}` },
     // })
 
-    const mock = {
-      status: 200,
-      statusText: '200',
-      headers: {},
-      config: {},
-      data: {
-        id: '1',
-        name: 'Pietro Bondioli',
-        nickname: 'pietro',
-        description: 'description',
-        email: 'pietrobondiolipessoal@gmail.com',
-        secondaryEmail: 'pietrobondiolipessoal@gmail.com',
-        avatar: {
-          id: '1',
-          title: 'avatar',
-          url: 'https://cdn-icons-png.flaticon.com/512/4712/4712206.png',
-          alt: 'avatar',
-        },
-      },
-    }
+    const mock = testData.user
 
     return mock
   }

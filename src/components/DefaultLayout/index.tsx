@@ -6,7 +6,7 @@ import style from './style.module.scss'
 import { Header } from '../Header'
 import { Footer } from '../Footer'
 
-function HomeLayout() {
+function DefaultLayout() {
   return (
     <div className={style['home-layout']}>
       <Header />
@@ -16,4 +16,4 @@ function HomeLayout() {
   )
 }
 
-export { HomeLayout }
+export { DefaultLayout }

@@ -9,6 +9,8 @@ class AppRoutes {
 
   public static LOGIN = '/login'
 
+  public static LOGOUT = '/logout'
+
   public static SIGNUP = '/signup'
 
   public static RECOVER_ACCESS = '/recover-access'
