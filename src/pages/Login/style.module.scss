@@ -1,0 +1,75 @@
+@use '../../styles/utils/mixin' as m;
+@use '../../styles/variables/shadows' as s;
+
+.login-form {
+  @include m.flex-center(column);
+  gap: 1rem;
+
+  &__field {
+    @include m.flex-container(column, flex-start);
+    width: 320px;
+
+    label {
+      padding: 0.5rem 0;
+    }
+  }
+}
+
+.error-msg {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.2rem;
+  color: red;
+}
+
+.input {
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: s.$box-shadow-light;
+
+  &:focus {
+    box-shadow: s.$box-shadow-normal;
+    border: 1px solid #aaa;
+  }
+}
+
+.password-input {
+  @include m.flex-center;
+  width: 100%;
+}
+
+.hide-password-btn {
+  @include m.flex-center;
+  height: 100%;
+  padding: 0 1rem;
+  background: none;
+  border: 1px solid #aaa;
+  box-shadow: s.$box-shadow-light;
+
+  &:hover {
+    box-shadow: s.$box-shadow-normal;
+    cursor: pointer;
+  }
+}
+
+.submit-btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid #aaa;
+  box-shadow: s.$box-shadow-light;
+
+  &:hover {
+    box-shadow: s.$box-shadow-normal;
+    cursor: pointer;
+  }
+}
+
+.register-link {
+  font-size: 1.2rem;
+  color: #00031d;
+
+  &:hover {
+    color: #00052e;
+  }
+}

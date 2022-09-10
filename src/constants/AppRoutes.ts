@@ -19,8 +19,6 @@ class AppRoutes {
 
   public static MY_PROFILE_EDIT = '/my-profile/edit'
 
-  public static MY_STORIES = '/my-stories'
-
   public static USER_PROFILE = '/user/:id/profile'
 
   public static STORY = '/story/:id'

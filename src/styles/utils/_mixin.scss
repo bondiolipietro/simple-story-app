@@ -1,8 +1,8 @@
 // Size
 
 @mixin size($width: auto, $height: $width) {
-  min-width: $width;
-  min-height: $height;
+  width: $width;
+  height: $height;
 }
 
 // Flexbox/Grid Mixins

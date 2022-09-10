@@ -20,13 +20,13 @@ import { StoryCreate } from '../pages/StoryCreate'
 import { StoryEdit } from '../pages/StoryEdit'
 import { StoryShared } from '../pages/StoryShared'
 import { PrivacyPolicy } from '../pages/PrivacyPolicy'
-import { MyStories } from '../pages/MyStories'
 import { DefaultLayout } from '../components/DefaultLayout'
 import { ErrorPage } from '../pages/ErrorPage'
 import { getAuth } from '../store/selectors'
+import { Logout } from '../pages/Logout'
 
 function AppRouter() {
-  const authState = useSelector(getAuth)
+  const { isAuthenticated } = useSelector(getAuth)
 
   return (
     <BrowserRouter basename={`${AppConfig.APP_BASE_PATH}`}>
@@ -44,12 +44,12 @@ function AppRouter() {
           <Route path={AppRoutes.STORY} element={<Story />} />
           <Route path={AppRoutes.STORY_SHARED} element={<StoryShared />} />
           <Route path={AppRoutes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
-          <Route element={<ProtectedRoute isAllowed={authState.isAuthenticated} />}>
-            <Route path={AppRoutes.MY_STORIES} element={<MyStories />}></Route>
+          <Route element={<ProtectedRoute isAllowed={isAuthenticated} />}>
             <Route path={AppRoutes.MY_PROFILE} element={<MyProfile />}></Route>
             <Route path={AppRoutes.MY_PROFILE_EDIT} element={<MyProfileEdit />}></Route>
             <Route path={AppRoutes.STORY_CREATE} element={<StoryCreate />} />
             <Route path={AppRoutes.STORY_EDIT} element={<StoryEdit />} />
+            <Route path={AppRoutes.LOGOUT} element={<Logout />}></Route>
           </Route>
         </Route>
       </Routes>

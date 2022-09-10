@@ -1,17 +1,18 @@
-@use '../../../styles/utils/mixin' as m;
+@use '../../../styles/variables/colors' as C;
+@use '../../../styles/utils/mixin' as M;
 
 .navbar {
   display: flex;
   gap: 1rem;
   height: 100%;
   &__item {
-    @include m.reset-link;
-    @include m.flex-center;
+    @include M.reset-link;
+    @include M.flex-center;
     padding: 0 1rem;
     color: black;
     border-bottom: 2px solid transparent;
     &:hover {
-      border-bottom: 2px solid #9affa2;
+      border-bottom: 2px solid C.$sea-green-normal;
     }
   }
 }

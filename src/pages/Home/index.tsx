@@ -13,8 +13,8 @@ function Home() {
   React.useEffect(() => {
     const getPublicStoriesPreview = async () => {
       const response = await simpleStoryService.getPublicStoriesPreview()
-      console.log(response)
-      setPublicStories(response.data)
+
+      setPublicStories(response)
     }
 
     getPublicStoriesPreview()

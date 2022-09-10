@@ -1,0 +1,35 @@
+@use '../../styles/utils/mixin' as m;
+
+.user-profile {
+  display: grid;
+  grid-template: 'presentation' 'stories' / 2fr 6fr;
+  max-height: 80vh;
+}
+
+.presentation {
+  @include m.flex-container(column, space-around);
+  padding: 4rem;
+  gap: 1rem;
+
+  &__avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  &__nickname {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  &__description {
+    border: 1px solid #ccc;
+    min-height: 50%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.public-stories {
+  padding: 4rem;
+  overflow-y: auto;
+}

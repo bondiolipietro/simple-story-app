@@ -4,7 +4,13 @@ import { ServiceBase } from './base/ServiceBase'
 import { testData } from './test_data'
 
 import { AppConfig } from '../config/AppConfig'
-import { IUserCreateRequest, IUserInfo, IUserPreview, IUserUpdateRequest } from '../types'
+import {
+  ILoginResponse,
+  IUserCreateRequest,
+  IUserInfo,
+  IUserPreview,
+  IUserUpdateRequest,
+} from '../types'
 
 class UserService extends ServiceBase {
   constructor() {
@@ -20,10 +26,12 @@ class UserService extends ServiceBase {
     return response
   }
 
-  public async login(email: string, password: string): Promise<AxiosResponse> {
-    const response = await this.http.post('/login', { email, password })
+  public async login(email: string, password: string): Promise<ILoginResponse> {
+    // const response = await this.http.post<ILoginResponse>('/login', { email, password })
 
-    return response
+    const mock = testData.loginResponse
+
+    return mock
   }
 
   public async logout(userId: string, authToken: string): Promise<AxiosResponse> {
@@ -42,7 +50,7 @@ class UserService extends ServiceBase {
     return response
   }
 
-  public async getUserInfo(id: string, authToken: string): Promise<AxiosResponse<IUserInfo>> {
+  public async getUserInfo(id: string, authToken: string): Promise<IUserInfo> {
     // const response = await this.http.get<IUserInfo>(`/${id}/info`, {
     //   headers: { Authorization: `Bearer ${authToken}` },
     // })
@@ -52,10 +60,13 @@ class UserService extends ServiceBase {
     return mock
   }
 
-  public async getUserPreview(id: string): Promise<AxiosResponse> {
-    const response = await this.http.get<IUserPreview>(`/${id}/info/preview`)
+  public async getUserPreview(id: string): Promise<IUserPreview> {
+    // const response = await this.http.get<IUserPreview>(`/${id}/info/preview`)
 
-    return response
+    const mock = testData.userPreview
+
+    return mock
+    // return response.data
   }
 
   public async updateUserInfo(

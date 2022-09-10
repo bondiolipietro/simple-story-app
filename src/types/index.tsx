@@ -20,6 +20,7 @@ export type IStory = {
     image: IImageContent
     authorId: string
     private: boolean
+    createdAt: string // ISO 8601
   }
   analytics: {
     views: number
@@ -56,10 +57,10 @@ export type IStoryFrameParagraph = {
 export type IStoryAudio = IMediaContent
 
 export type IStoryImage = IMediaContent & {
-  size: ISize
+  size: Size
 }
 
-export enum ISize {
+export enum Size {
   SMALL = 'small',
   MEDIUM = 'medium',
   LARGE = 'large',
@@ -83,9 +84,9 @@ export type IUserPreview = Pick<IUserInfo, 'id' | 'name' | 'nickname' | 'descrip
 
 export type IUserAvatar = IMediaContent
 
-export type ILoginForm = {
-  email: string
-  password: string
+export type ILoginResponse = {
+  userId: string
+  authToken: string
 }
 
 export type IUserCreateRequest = Omit<IUserInfo, 'id' | 'description' | 'secondaryEmail'> & {

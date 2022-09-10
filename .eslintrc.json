@@ -98,6 +98,7 @@
         "react/require-default-props": "warn",
         "no-plusplus": "off",
         "arrow-body-style": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         "sort-imports": [
             "error",
             {

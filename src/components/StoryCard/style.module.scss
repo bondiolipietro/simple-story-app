@@ -1,28 +1,66 @@
-@use '../../styles/utils/mixin' as m;
+@use '../../styles/utils/mixin' as M;
+@use '../../styles/variables/shadows' as S;
+@use '../../styles/variables/colors' as C;
 
 .story-card {
-  @include m.reset-link;
-  @include m.flex-container(column);
-  max-width: 512px;
+  @include M.reset-link;
+  display: grid;
+  grid-template-rows: 7fr 1fr;
   gap: 0.5rem;
-  padding: 1.5rem 1rem;
   border: 1px solid #ccc;
-  box-shadow: 1px 1px 2px rgba(#0c0c0c, 0.1);
-  color: black;
-  border-radius: 1px;
+  box-shadow: S.$box-shadow-light;
+  max-height: 430px;
+  width: 100%;
 
   &:hover {
-    box-shadow: 1px 1px 3px rgba(#0c0c0c, 0.2);
+    box-shadow: S.$box-shadow-bold;
   }
 
-  &__title {
-    font-size: 1.3rem;
+  .header {
+    display: grid;
+    grid-template-rows: 3fr 2fr 3fr;
+    gap: 0.5rem;
+    overflow: auto;
+
+    .img {
+      font-size: 1.1rem;
+      color: #000;
+      width: 100%;
+    }
+    .title {
+      font-size: 1.1rem;
+      color: #000;
+      padding: 0.2rem 0.8rem;
+    }
+    .desc {
+      font-size: 0.9rem;
+      color: gray;
+      padding: 0.2rem 0.7rem;
+      width: 100%;
+      overflow: hidden;
+    }
   }
-  &__desc {
-    font-size: 1rem;
-    color: gray;
+  .footer {
+    @include M.flex-container(row, space-between, center);
+    padding: 0.4rem 0.7rem;
+
+    .user-avatar {
+      box-shadow: S.$box-shadow-bold;
+
+      &:hover {
+        box-shadow: S.$box-shadow-bolder;
+      }
+    }
+
+    .user-link,
+    .user-avatar {
+      @include M.size(2.2rem);
+      border-radius: 50%;
+    }
   }
-  &__img {
-    width: auto;
-  }
+}
+
+.card-actions {
+  @include M.flex-center;
+  gap: 0.5rem;
 }

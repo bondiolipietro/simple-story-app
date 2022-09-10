@@ -52,7 +52,7 @@ function StoryComp(props: IStoryProps) {
           )
 
       console.log(response)
-      setStory(response.data)
+      setStory(response)
     }
 
     getStory()

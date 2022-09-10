@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from './style.module.scss'
 
-import { ISize, IStoryFrame } from '../../../types'
+import { IStoryFrame, Size } from '../../../types'
 
 type IStoryArtProps = {
   frame: IStoryFrame
@@ -11,10 +11,10 @@ type IStoryArtProps = {
 function StoryArt(props: IStoryArtProps) {
   const { frame } = props
 
-  const imageSizes: Record<ISize, string> = {
-    [ISize.SMALL]: style.small,
-    [ISize.MEDIUM]: style.medium,
-    [ISize.LARGE]: style.large,
+  const imageSizes: Record<Size, string> = {
+    [Size.SMALL]: style.small,
+    [Size.MEDIUM]: style.medium,
+    [Size.LARGE]: style.large,
   }
 
   return (

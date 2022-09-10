@@ -13,10 +13,6 @@ function Navbar() {
 
   const authenticatedMenus = [
     {
-      text: 'My Stories',
-      path: AppRoutes.MY_STORIES,
-    },
-    {
       text: 'New Story',
       path: AppRoutes.STORY_CREATE,
     },
