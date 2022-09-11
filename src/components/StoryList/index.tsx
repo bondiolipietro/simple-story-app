@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from './style.module.scss'
 
-import { IStoryPreview, Size } from '../../types'
+import { IStoryPreview } from '../../types'
 import { StoryCard } from '../StoryCard'
 
 type IStoryListProps = {

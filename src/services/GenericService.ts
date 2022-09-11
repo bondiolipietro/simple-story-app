@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios'
+
 import { ServiceBase } from './base/ServiceBase'
 
 class GenericService extends ServiceBase {

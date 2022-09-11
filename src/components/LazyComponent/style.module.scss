@@ -1,0 +1,7 @@
+@use '../../styles/utils/mixin' as m;
+@use '../../styles/variables/colors' as c;
+
+.loading {
+  @include m.flex-center;
+  @include m.size(100%);
+}

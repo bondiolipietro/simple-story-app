@@ -2,16 +2,15 @@ import React from 'react'
 
 import style from './style.module.scss'
 
-import { StoryList } from '../StoryList'
-import { IStoryPreview, IUserInfo, IUserPreview, Size } from '../../types'
+import { UserStoryList } from '../UserStoryList'
+import { IUserInfo, IUserPreview } from '../../types'
 
 type IProfileProps = {
   user: IUserInfo | IUserPreview
-  userStories?: Array<IStoryPreview>
 }
 
 function Profile(props: IProfileProps) {
-  const { user, userStories } = props
+  const { user } = props
 
   return (
     <div className={style['user-profile']}>
@@ -28,7 +27,7 @@ function Profile(props: IProfileProps) {
         </div>
       </div>
       <div className={style['public-stories']}>
-        {userStories ? <StoryList stories={userStories} /> : <div>Loading...</div>}
+        <UserStoryList userId={user.id} />
       </div>
     </div>
   )

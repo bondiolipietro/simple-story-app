@@ -11,6 +11,25 @@ export type IAuthState = {
   error?: Error
 }
 
+// Services
+
+export enum ResponseStatus {
+  SUCCESS = 'success',
+  ERROR = 'error',
+  FAIL = 'fail',
+}
+
+export type IDefaultResponse = {
+  status: ResponseStatus
+  message: string
+}
+
+export type IDefaultSuccessResponse = IDefaultResponse & {
+  data: unknown
+}
+
+export type IDefaultErrorResponse = IDefaultResponse
+
 export type IStory = {
   id: string
   frames: Array<IStoryFrame>

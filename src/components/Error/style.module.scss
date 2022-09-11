@@ -1,0 +1,20 @@
+@use '../../styles/utils/mixin' as M;
+@use '../../styles/variables/colors' as C;
+
+.error {
+  @include M.flex-center(column);
+  gap: 2rem;
+  @include M.size(100%);
+  padding: 2rem;
+
+  .alert-icon {
+    @include M.size(3rem);
+    color: C.$orange-default-normal;
+  }
+
+  &__message {
+    max-width: 512px;
+    font-size: 1.1rem;
+    color: C.$grey-default-normal;
+  }
+}

@@ -5,6 +5,7 @@ import { testData } from './test_data'
 
 import { AppConfig } from '../config/AppConfig'
 import {
+  IAuthState,
   ILoginResponse,
   IUserCreateRequest,
   IUserInfo,
@@ -34,11 +35,11 @@ class UserService extends ServiceBase {
     return mock
   }
 
-  public async logout(userId: string, authToken: string): Promise<AxiosResponse> {
+  public async logout(userId: string, authInfo: IAuthState): Promise<AxiosResponse> {
     const response = await this.http.post(
       '/logout',
       { userId },
-      { headers: { Authorization: `Bearer ${authToken}` } },
+      { headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` } },
     )
 
     return response
@@ -50,9 +51,9 @@ class UserService extends ServiceBase {
     return response
   }
 
-  public async getUserInfo(id: string, authToken: string): Promise<IUserInfo> {
+  public async getUserInfo(id: string, authInfo: IAuthState): Promise<IUserInfo> {
     // const response = await this.http.get<IUserInfo>(`/${id}/info`, {
-    //   headers: { Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
 
     const mock = testData.user
@@ -71,11 +72,11 @@ class UserService extends ServiceBase {
 
   public async updateUserInfo(
     id: string,
-    authToken: string,
     user: IUserUpdateRequest,
+    authInfo: IAuthState,
   ): Promise<AxiosResponse> {
     const response = await this.http.put<IUserInfo>(`/${id}/info`, user, {
-      headers: { Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response
@@ -83,23 +84,23 @@ class UserService extends ServiceBase {
 
   public async updateUserPassword(
     id: string,
-    authToken: string,
     password: string,
+    authInfo: IAuthState,
   ): Promise<AxiosResponse> {
     const response = await this.http.put<IUserInfo>(
       `/${id}/info/password`,
       { password },
       {
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
       },
     )
 
     return response
   }
 
-  public async deleteUser(id: string, authToken: string): Promise<AxiosResponse> {
+  public async deleteUser(id: string, authInfo: IAuthState): Promise<AxiosResponse> {
     const response = await this.http.delete<IUserInfo>(`/${id}`, {
-      headers: { Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response

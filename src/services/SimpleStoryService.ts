@@ -4,7 +4,13 @@ import { ServiceBase } from './base/ServiceBase'
 import { testData } from './test_data'
 
 import { AppConfig } from '../config/AppConfig'
-import { IStory, IStoryCreateRequest, IStoryPreview, IStoryUpdateRequest } from '../types'
+import {
+  IAuthState,
+  IStory,
+  IStoryCreateRequest,
+  IStoryPreview,
+  IStoryUpdateRequest,
+} from '../types'
 
 class SimpleStoryService extends ServiceBase {
   constructor() {
@@ -14,9 +20,9 @@ class SimpleStoryService extends ServiceBase {
     })
   }
 
-  public async getStoryById(id: string, userId: string, authToken: string): Promise<IStory> {
+  public async getStoryById(id: string, authInfo: IAuthState): Promise<IStory> {
     // const response = await this.http.get<IStory>(`/${id}`, {
-    // headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
 
     const mock = testData.story
@@ -50,12 +56,9 @@ class SimpleStoryService extends ServiceBase {
     return mock
   }
 
-  public async getStoriesPreviewByUserId(
-    userId: string,
-    authToken?: string,
-  ): Promise<IStoryPreview[]> {
+  public async getStoriesPreviewByUserId(authInfo: IAuthState): Promise<IStoryPreview[]> {
     // const response = await this.http.get<IStoryPreview[]>('/preview`', {
-    // headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
 
     const mock = testData.storiesPreview
@@ -64,12 +67,11 @@ class SimpleStoryService extends ServiceBase {
   }
 
   public async createStory(
-    userId: string,
-    authToken: string,
     story: IStoryCreateRequest,
+    authInfo: IAuthState,
   ): Promise<AxiosResponse> {
     const response = await this.http.post(this.EMPTY_PATH, story, {
-      headers: { User: userId, Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response
@@ -77,24 +79,19 @@ class SimpleStoryService extends ServiceBase {
 
   public async updateStory(
     id: string,
-    userId: string,
-    authToken: string,
     story: IStoryUpdateRequest,
+    authInfo: IAuthState,
   ): Promise<AxiosResponse> {
     const response = await this.http.put(`/${id}`, story, {
-      headers: { User: userId, Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response
   }
 
-  public async deleteStoryById(
-    id: string,
-    userId: string,
-    authToken: string,
-  ): Promise<AxiosResponse> {
+  public async deleteStoryById(id: string, authInfo: IAuthState): Promise<AxiosResponse> {
     const response = await this.http.delete(`/${id}`, {
-      headers: { User: userId, Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response
@@ -103,12 +100,11 @@ class SimpleStoryService extends ServiceBase {
   public async getStoryLikedBy(
     id: string,
     likedByUserId: string,
-    userId: string,
-    authToken: string,
+    authInfo: IAuthState,
   ): Promise<boolean> {
     // const response = await this.http.get<boolean>(`/${id}/like`, {
     //   params: { likedByUserId },
-    //   headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    //   headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
 
     const mock = Boolean(Math.round(Math.random()))
@@ -117,35 +113,31 @@ class SimpleStoryService extends ServiceBase {
     // return response.data
   }
 
-  public async getAllStoryLikes(
-    id: string,
-    userId: string,
-    authToken: string,
-  ): Promise<AxiosResponse> {
+  public async getAllStoryLikes(id: string, authInfo: IAuthState): Promise<AxiosResponse> {
     const response = await this.http.get(`/${id}/like`, {
-      headers: { User: userId, Authorization: `Bearer ${authToken}` },
+      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     })
 
     return response
   }
 
-  public async likeStory(id: string, userId: string, authToken: string): Promise<void> {
+  public async likeStory(id: string, authInfo: IAuthState): Promise<void> {
     // const response = await this.http.post(`/${id}/like`, {
-    //   headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
     // return response
   }
 
-  public async removeLikeFromStory(id: string, userId: string, authToken: string): Promise<void> {
+  public async removeLikeFromStory(id: string, authInfo: IAuthState): Promise<void> {
     // const response = await this.http.delete(`/${id}/like`, {
-    //   headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
     // return response
   }
 
-  public async addViewToStory(id: string, userId: string, authToken: string): Promise<void> {
+  public async addViewToStory(id: string, authInfo: IAuthState): Promise<void> {
     // const response = await this.http.post(`/${id}/view`, {
-    //   headers: { User: userId, Authorization: `Bearer ${authToken}` },
+    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
     // })
     // return response
   }
