@@ -1,9 +1,0 @@
-@use '../../styles/utils/mixin' as m;
-
-.story-list {
-  @include m.grid-container(repeat(auto-fill, minmax(256px, 1fr)));
-  gap: 1.5rem;
-  li {
-    width: 100%;
-  }
-}

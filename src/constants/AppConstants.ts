@@ -1,5 +1,5 @@
 class AppConstants {
-  public static APPLICATION_NAME = 'simple-story-app';
+  public static APPLICATION_NAME = "simple-story-app"
 }
 
-export { AppConstants };
+export { AppConstants }

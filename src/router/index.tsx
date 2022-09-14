@@ -1,29 +1,29 @@
-import React from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import * as React from "react"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { useSelector } from "react-redux"
 
-import { ProtectedRoute } from './ProtectedRoute'
+import { ProtectedRoute } from "./ProtectedRoute"
 
-import { AppConfig } from '../config/AppConfig'
-import { AppRoutes } from '../constants/AppRoutes'
-import { NotFound } from '../pages/NotFound'
-import { Home } from '../pages/Home'
-import { Login } from '../pages/Login'
-import { About } from '../pages/About'
-import { Signup } from '../pages/Signup'
-import { RecoverAccess } from '../pages/RecoverAccess'
-import { MyProfile } from '../pages/MyProfile'
-import { MyProfileEdit } from '../pages/MyProfileEdit'
-import { UserProfile } from '../pages/UserProfile'
-import { Story } from '../pages/Story'
-import { StoryCreate } from '../pages/StoryCreate'
-import { StoryEdit } from '../pages/StoryEdit'
-import { StoryShared } from '../pages/StoryShared'
-import { PrivacyPolicy } from '../pages/PrivacyPolicy'
-import { DefaultLayout } from '../components/DefaultLayout'
-import { ErrorPage } from '../pages/ErrorPage'
-import { getAuth } from '../store/selectors'
-import { Logout } from '../pages/Logout'
+import { AppConfig } from "../config/AppConfig"
+import { AppRoutes } from "../constants/AppRoutes"
+import { NotFound } from "../pages/NotFound"
+import { Home } from "../pages/Home"
+import { Login } from "../pages/Login"
+import { About } from "../pages/About"
+import { Signup } from "../pages/Signup"
+import { RecoverAccess } from "../pages/RecoverAccess"
+import { MyProfile } from "../pages/MyProfile"
+import { MyProfileEdit } from "../pages/MyProfileEdit"
+import { UserProfile } from "../pages/UserProfile"
+import { Story } from "../pages/Story"
+import { StoryCreate } from "../pages/StoryCreate"
+import { StoryEdit } from "../pages/StoryEdit"
+import { StoryShared } from "../pages/StoryShared"
+import { PrivacyPolicy } from "../pages/PrivacyPolicy"
+import { DefaultLayout } from "../components/DefaultLayout"
+import { ErrorPage } from "../pages/ErrorPage"
+import { getAuth } from "../store/selectors"
+import { Logout } from "../pages/Logout"
 
 function AppRouter() {
   const { isAuthenticated } = useSelector(getAuth)

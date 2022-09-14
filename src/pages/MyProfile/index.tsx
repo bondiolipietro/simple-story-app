@@ -1,18 +1,13 @@
-import React from 'react'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import * as React from "react"
+import { useSelector } from "react-redux"
 
-import { Profile } from '../../components/Profile'
-import { AppRoutes } from '../../constants/AppRoutes'
-import { simpleStoryService } from '../../services/SimpleStoryService'
-import { getAuth } from '../../store/selectors'
-import { IDefaultErrorResponse, IStoryPreview } from '../../types'
+import { Profile } from "../../components/Profile"
+import { getAuth } from "../../store/selectors"
 
 function MyProfile() {
   const { user } = useSelector(getAuth)
 
-  return <Profile user={user!} />
+  return <Profile user={user} />
 }
 
 export { MyProfile }

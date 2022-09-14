@@ -1,145 +1,173 @@
-import { AxiosResponse } from 'axios'
+import { AxiosResponse } from "axios"
 
-import { ServiceBase } from './base/ServiceBase'
-import { testData } from './test_data'
+import { ServiceBase } from "./base/ServiceBase"
+import { createTestResponse, testData } from "./test_data"
 
-import { AppConfig } from '../config/AppConfig'
+import { AppConfig } from "../config/AppConfig"
 import {
-  IAuthState,
+  IDefaultResponse,
   IStory,
   IStoryCreateRequest,
   IStoryPreview,
   IStoryUpdateRequest,
-} from '../types'
+  IUserPreview,
+} from "../types"
 
 class SimpleStoryService extends ServiceBase {
   constructor() {
     super({
       BaseUrl: AppConfig.API_BASE_URL,
-      BasePath: '/story',
+      BasePath: "/story",
     })
   }
 
-  public async getStoryById(id: string, authInfo: IAuthState): Promise<IStory> {
-    // const response = await this.http.get<IStory>(`/${id}`, {
-    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+  public async getStoryById(
+    id: string,
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<IStory>> {
+    // const response = await this.http.get(`/${id}`, {
+    // headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
 
-    const mock = testData.story
+    const mock = createTestResponse(testData.story)
 
     return mock
   }
 
-  public async getStoryUsingShareToken(shareToken: string, userId?: string): Promise<IStory> {
-    // const response = await this.http.get<IStory>(this.EMPTY_PATH, {
+  public async getStoryUsingShareToken(
+    shareToken: string,
+    userId?: string,
+  ): Promise<IDefaultResponse<IStory>> {
+    // const response = await this.http.get(this.EMPTY_PATH, {
     //   params: { shareToken, userId },
     // })
 
-    const mock = testData.story
+    const mock = createTestResponse(testData.story)
 
     return mock
   }
 
-  public async getStoryPreviewById(id: string): Promise<IStoryPreview> {
-    // const response = await this.http.get<IStoryPreview>(`/${id}/preview`)
+  public async getStoryPreviewById(id: string): Promise<IDefaultResponse<IStoryPreview>> {
+    // const response = await this.http.get(`/${id}/preview`)
 
-    const mock = testData.storyPreview
-
-    return mock
-  }
-
-  public async getPublicStoriesPreview(): Promise<IStoryPreview[]> {
-    // const response = await this.http.get<IStoryPreview[]>('/public/preview')
-
-    const mock = testData.storiesPreview
+    const mock = createTestResponse(testData.storyPreview)
 
     return mock
   }
 
-  public async getStoriesPreviewByUserId(authInfo: IAuthState): Promise<IStoryPreview[]> {
-    // const response = await this.http.get<IStoryPreview[]>('/preview`', {
-    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+  public async getPublicStoriesPreview(): Promise<IDefaultResponse<IStoryPreview[]>> {
+    // const response = await this.http.get('/public/preview')
+
+    const mock = createTestResponse(testData.storiesPreview)
+
+    return mock
+  }
+
+  public async getStoriesPreviewByUserId(
+    userId: string,
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<IStoryPreview[]>> {
+    // const response = await this.http.get('/preview`', {
+    // params: { userId },
+    // headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
 
-    const mock = testData.storiesPreview
+    const mock = createTestResponse(testData.storiesPreview)
 
     return mock
   }
 
   public async createStory(
     story: IStoryCreateRequest,
-    authInfo: IAuthState,
-  ): Promise<AxiosResponse> {
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<Pick<IStory, "id">>> {
     const response = await this.http.post(this.EMPTY_PATH, story, {
-      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+      headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     })
 
-    return response
+    return response.data
   }
 
   public async updateStory(
     id: string,
     story: IStoryUpdateRequest,
-    authInfo: IAuthState,
-  ): Promise<AxiosResponse> {
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<Pick<IStory, "id">>> {
     const response = await this.http.put(`/${id}`, story, {
-      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+      headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     })
 
-    return response
+    return response.data
   }
 
-  public async deleteStoryById(id: string, authInfo: IAuthState): Promise<AxiosResponse> {
+  public async deleteStoryById(
+    id: string,
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<Pick<IStory, "id">>> {
     const response = await this.http.delete(`/${id}`, {
-      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+      headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     })
 
-    return response
+    return response.data
   }
 
   public async getStoryLikedBy(
     id: string,
     likedByUserId: string,
-    authInfo: IAuthState,
-  ): Promise<boolean> {
-    // const response = await this.http.get<boolean>(`/${id}/like`, {
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<boolean>> {
+    // const response = await this.http.get(`/${id}/like`, {
     //   params: { likedByUserId },
-    //   headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+    //   headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
 
-    const mock = Boolean(Math.round(Math.random()))
+    const mock = createTestResponse(Boolean(Math.round(Math.random())))
 
     return mock
     // return response.data
   }
 
-  public async getAllStoryLikes(id: string, authInfo: IAuthState): Promise<AxiosResponse> {
+  public async getAllStoryLikes(
+    id: string,
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<IDefaultResponse<Pick<IUserPreview, "id">>> {
     const response = await this.http.get(`/${id}/like`, {
-      headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+      headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     })
 
-    return response
+    return response.data
   }
 
-  public async likeStory(id: string, authInfo: IAuthState): Promise<void> {
+  public async likeStory(id: string, loggedUserId: string, authToken: string): Promise<void> {
     // const response = await this.http.post(`/${id}/like`, {
-    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+    // headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
-    // return response
+    // return response.data
   }
 
-  public async removeLikeFromStory(id: string, authInfo: IAuthState): Promise<void> {
-    // const response = await this.http.delete(`/${id}/like`, {
-    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+  public async removeLikeFromStory(
+    id: string,
+    loggedUserId: string,
+    authToken: string,
+  ): Promise<void> {
+    // const response = await this.http.delete(`/${id}/dislike`, {
+    // headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
-    // return response
+    // return response.data
   }
 
-  public async addViewToStory(id: string, authInfo: IAuthState): Promise<void> {
+  public async addViewToStory(id: string, loggedUserId: string, authToken: string): Promise<void> {
     // const response = await this.http.post(`/${id}/view`, {
-    // headers: { User: `${authInfo.user?.id}`, Authorization: `Bearer ${authInfo.authToken}` },
+    // headers: { User: `${loggedUserId}`, Authorization: `Bearer ${authToken}` },
     // })
-    // return response
+    // return response.data
   }
 }
 

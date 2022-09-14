@@ -1,0 +1,37 @@
+@use '../../styles/utils/mixin' as M;
+
+.recover-access {
+  @include M.flex-center;
+}
+
+.recover-access-form {
+  @include M.flex-center(column);
+  gap: 1rem;
+  width: 320px;
+
+  &__title,
+  &__info {
+    width: 100%;
+  }
+  &__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__field {
+    @include M.flex-container(column, flex-start);
+    @include M.size(100%);
+    gap: 0.5rem;
+
+    label {
+      font-weight: bold;
+      padding: 0.5rem 0;
+    }
+  }
+}
+
+.error-msg {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.2rem;
+  color: red;
+}

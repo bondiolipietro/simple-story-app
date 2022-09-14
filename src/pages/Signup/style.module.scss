@@ -1,0 +1,11 @@
+@use "../../styles/utils/mixin" as M;
+
+.signup {
+  @include M.flex-center;
+}
+
+.signup-form {
+  @include M.flex-center(column);
+  gap: 1rem;
+  width: 320px;
+}

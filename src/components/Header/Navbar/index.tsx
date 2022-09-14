@@ -1,23 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { RiLogoutBoxRLine } from 'react-icons/ri'
+import * as React from "react"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { RiLogoutBoxRLine } from "react-icons/ri"
 
-import style from './style.module.scss'
+import style from "./style.module.scss"
 
-import { AppRoutes } from '../../../constants/AppRoutes'
-import { getAuth } from '../../../store/selectors'
+import { AppRoutes } from "../../../constants/AppRoutes"
+import { getAuth } from "../../../store/selectors"
 
 function Navbar() {
   const { isAuthenticated } = useSelector(getAuth)
 
   const authenticatedMenus = [
     {
-      text: 'New Story',
+      text: "New Story",
       path: AppRoutes.STORY_CREATE,
     },
     {
-      text: 'My Profile',
+      text: "My Profile",
       path: AppRoutes.MY_PROFILE,
     },
     {
@@ -28,7 +28,11 @@ function Navbar() {
 
   const unauthenticatedMenus = [
     {
-      text: 'Login',
+      text: "Signup",
+      path: AppRoutes.SIGNUP,
+    },
+    {
+      text: "Login",
       path: AppRoutes.LOGIN,
     },
   ]
@@ -36,9 +40,9 @@ function Navbar() {
   const currentMenuList = isAuthenticated ? authenticatedMenus : unauthenticatedMenus
 
   return (
-    <nav className={style['navbar']}>
+    <nav className={style["navbar"]}>
       {currentMenuList.map((menu) => (
-        <Link key={menu.path} className={style['navbar__item']} to={menu.path}>
+        <Link key={menu.path} className={style["navbar__item"]} to={menu.path}>
           {menu.text}
         </Link>
       ))}

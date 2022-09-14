@@ -9,11 +9,11 @@
   gap: 0.5rem;
   border: 1px solid #ccc;
   box-shadow: S.$box-shadow-light;
-  max-height: 430px;
+  height: 430px;
   width: 100%;
 
   &:hover {
-    box-shadow: S.$box-shadow-bold;
+    box-shadow: S.$box-shadow-normal;
   }
 
   .header {

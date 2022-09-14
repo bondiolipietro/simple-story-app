@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance } from "axios"
 
 interface IConstructorProps {
   BaseUrl?: string
@@ -14,17 +14,17 @@ interface IConstructorProps {
 abstract class ServiceBase {
   protected readonly http: AxiosInstance
 
-  protected ACCEPT_HEADER_NAME = 'Accept'
+  protected ACCEPT_HEADER_NAME = "Accept"
 
-  protected CONTENT_TYPE_HEADER_NAME = 'Content-Type'
+  protected CONTENT_TYPE_HEADER_NAME = "Content-Type"
 
-  protected ACCEPTED_CONTENT_HEADER = 'application/json'
+  protected ACCEPTED_CONTENT_HEADER = "application/json"
 
-  protected EMPTY_PATH = ''
+  protected EMPTY_PATH = ""
 
   protected REQUEST_EMPTY_BODY = {}
 
-  public constructor({ BaseUrl = '', BasePath = '' }: IConstructorProps) {
+  public constructor({ BaseUrl = "", BasePath = "" }: IConstructorProps) {
     const serviceUrl = BaseUrl + BasePath
 
     this.http = axios.create({ baseURL: serviceUrl })

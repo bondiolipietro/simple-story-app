@@ -1,8 +1,8 @@
-import React from 'react'
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import * as React from "react"
+import { Navigate, Outlet, useLocation } from "react-router-dom"
 
-import { AppRoutes } from '../../constants/AppRoutes'
-import { logger } from '../../utils/logger'
+import { AppRoutes } from "../../constants/AppRoutes"
+import { logger } from "../../utils/logger"
 
 type IProtectedRouteProps = {
   isAllowed: boolean
@@ -17,8 +17,10 @@ function ProtectedRoute({
 }: IProtectedRouteProps) {
   const location = useLocation()
 
+  console.log("passou aq3")
+
   if (!isAllowed) {
-    logger.info('Trying to access {route} without permission.', {
+    logger.info("Trying to access {route} without permission.", {
       route: location.pathname,
     })
 

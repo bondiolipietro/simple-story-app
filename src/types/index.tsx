@@ -1,4 +1,4 @@
-import { PersistPartial } from 'redux-persist/lib/persistReducer'
+import { PersistPartial } from "redux-persist/lib/persistReducer"
 
 export type IRootState = {
   authState: IAuthState & PersistPartial
@@ -14,21 +14,20 @@ export type IAuthState = {
 // Services
 
 export enum ResponseStatus {
-  SUCCESS = 'success',
-  ERROR = 'error',
-  FAIL = 'fail',
+  SUCCESS = "success",
+  ERROR = "error",
+  FAIL = "fail",
 }
 
-export type IDefaultResponse = {
+export type IDefaultResponse<T> = {
   status: ResponseStatus
   message: string
+  data: T
 }
 
-export type IDefaultSuccessResponse = IDefaultResponse & {
-  data: unknown
-}
+export type IDefaultNoDataResponse = IDefaultResponse<null>
 
-export type IDefaultErrorResponse = IDefaultResponse
+export type IDefaultErrorResponse = IDefaultNoDataResponse
 
 export type IStory = {
   id: string
@@ -46,9 +45,9 @@ export type IStory = {
   }
 }
 
-export type IStoryPreview = Pick<IStory, 'id' | 'info' | 'analytics'>
+export type IStoryPreview = Pick<IStory, "id" | "info" | "analytics">
 
-export type IStoryCreateRequest = Pick<IStory, 'frames' | 'info'>
+export type IStoryCreateRequest = Pick<IStory, "frames" | "info">
 
 export type IStoryUpdateRequest = Partial<IStoryCreateRequest>
 
@@ -80,9 +79,9 @@ export type IStoryImage = IMediaContent & {
 }
 
 export enum Size {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-  LARGE = 'large',
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
 }
 
 export type IAuthInfo = {
@@ -99,7 +98,7 @@ export type IUserInfo = {
   avatar: IUserAvatar
 }
 
-export type IUserPreview = Pick<IUserInfo, 'id' | 'name' | 'nickname' | 'description' | 'avatar'>
+export type IUserPreview = Pick<IUserInfo, "id" | "name" | "nickname" | "description" | "avatar">
 
 export type IUserAvatar = IMediaContent
 
@@ -108,9 +107,11 @@ export type ILoginResponse = {
   authToken: string
 }
 
-export type IUserCreateRequest = Omit<IUserInfo, 'id' | 'description' | 'secondaryEmail'> & {
+export type IUserCreateRequest = Omit<
+  IUserInfo,
+  "id" | "description" | "secondaryEmail" | "avatar"
+> & {
   password: string
-  confirmPassword: string
 }
 
 export type IUserUpdateRequest = Partial<IUserInfo>

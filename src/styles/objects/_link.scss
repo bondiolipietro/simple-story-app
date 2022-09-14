@@ -1,0 +1,11 @@
+@use '../variables/colors' as C;
+
+.link {
+  font-size: 1.1rem;
+  color: C.$sea-green-dark;
+
+  &:hover {
+    color: C.$sea-green-darker;
+    text-decoration: underline;
+  }
+}

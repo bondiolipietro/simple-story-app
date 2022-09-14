@@ -1,30 +1,29 @@
-import React from 'react'
-import { CircularProgress } from '@mui/material'
-import { toast } from 'react-toastify'
+import * as React from "react"
 
-import style from './style.module.scss'
-
-import { Error } from '../Error'
-import { Loading } from '../Loading'
-import { IDefaultErrorResponse } from '../../types'
+import { Error } from "../Error"
+import { Loading } from "../Loading"
+import { ErrorHelper } from "../../utils/ErrorHelper"
 
 type ILazyComponentProps = {
   isLoading: boolean
   data?: unknown
   noDataMessage?: string
-  error: IDefaultErrorResponse | null
+  error: unknown
+  customErrorMessage?: string
   children: React.ReactNode
 }
 
 function LazyComponent(props: ILazyComponentProps) {
-  const { isLoading, data, noDataMessage, error, children } = props
+  const { isLoading, data, noDataMessage, error, customErrorMessage, children } = props
 
   if (isLoading) {
     return <Loading />
   }
 
   if (error) {
-    return <Error message={error.message} />
+    const errorMessage = customErrorMessage || ErrorHelper.getErrorMessage(error)
+
+    return <Error message={errorMessage} />
   }
 
   if (!data) {

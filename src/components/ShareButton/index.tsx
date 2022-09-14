@@ -1,12 +1,12 @@
-import React from 'react'
-import { FaShareAlt } from 'react-icons/fa'
-import { Tooltip } from '@mui/material'
+import * as React from "react"
+import { FaShareAlt } from "react-icons/fa"
+import { Tooltip } from "@mui/material"
 
-import style from './style.module.scss'
+import style from "./style.module.scss"
 
 enum INTERACTIONS {
-  COPY = 'copy link',
-  COPIED = 'copied!',
+  COPY = "copy link",
+  COPIED = "copied!",
 }
 
 type IShareButtonProps = {
@@ -30,7 +30,7 @@ function ShareButton(props: IShareButtonProps) {
       onOpen={() => setTooltipText(INTERACTIONS.COPY)}
       leaveTouchDelay={0}
     >
-      <button type='button' className={style['share-btn']} onClick={copyHrefToClipboard}>
+      <button type='button' className={style["share-btn"]} onClick={copyHrefToClipboard}>
         <FaShareAlt />
       </button>
     </Tooltip>

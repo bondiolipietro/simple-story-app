@@ -1,7 +1,200 @@
-import React from 'react'
+import * as React from "react"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+
+import style from "./style.module.scss"
+
+import { userService } from "../../services/UserService"
+import { AppRoutes } from "../../constants/AppRoutes"
+import { loginSuccess } from "../../store/slices/auth"
+import { InputField } from "../../components/InputField"
+import { StringHelper } from "../../utils/StringHelper"
+import { FormWarningsHelper } from "../../utils/FormWarningsHelper"
+
+enum FormFields {
+  NAME = "name",
+  NICKNAME = "nickname",
+  EMAIL = "email",
+  PASSWORD = "password",
+  CONFIRM_PASSWORD = "confirmPassword",
+}
+
+type ISignupFormData = {
+  [FormFields.NAME]: string
+  [FormFields.NICKNAME]: string
+  [FormFields.EMAIL]: string
+  [FormFields.PASSWORD]: string
+  [FormFields.CONFIRM_PASSWORD]: string
+}
+
+const FormExamples = {
+  [FormFields.NAME]: "John Foo Bar",
+  [FormFields.NICKNAME]: "dark shadow killer 12",
+  [FormFields.EMAIL]: "john@gmail.com",
+}
+
+const SignupFormSchema = yup
+  .object({
+    [FormFields.NAME]: yup
+      .string()
+      .required(FormWarningsHelper.requiredFieldMsg(FormFields.NAME))
+      .min(8, FormWarningsHelper.minLengthMsg(8))
+      .test("", FormWarningsHelper.onlyLettersMsg(FormFields.NAME), (value) =>
+        value ? /^[a-zA-Z]+$/.test(StringHelper.removeWhitespace(value)) : false,
+      ),
+    [FormFields.NICKNAME]: yup
+      .string()
+      .required(FormWarningsHelper.requiredFieldMsg(FormFields.NICKNAME))
+      .min(4, FormWarningsHelper.minLengthMsg(4, FormFields.NICKNAME))
+      .max(32, FormWarningsHelper.maxLengthMsg(32, FormFields.NICKNAME)),
+    [FormFields.EMAIL]: yup
+      .string()
+      .required(FormWarningsHelper.requiredFieldMsg(FormFields.EMAIL))
+      .email(FormWarningsHelper.invalidFieldMsg(FormFields.EMAIL)),
+    [FormFields.PASSWORD]: yup
+      .string()
+      .required(FormWarningsHelper.requiredFieldMsg(FormFields.PASSWORD))
+      .min(8, FormWarningsHelper.passwordRequirementsMsg(8))
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, FormWarningsHelper.passwordRequirementsMsg(8)),
+    [FormFields.CONFIRM_PASSWORD]: yup
+      .string()
+      .oneOf([yup.ref(FormFields.PASSWORD), null], FormWarningsHelper.passwordMismatchMsg()),
+  })
+  .required()
 
 function Signup() {
-  return <div>Signup</div>
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitted },
+  } = useForm<ISignupFormData>({
+    resolver: yupResolver(SignupFormSchema),
+  })
+
+  // Show hide password logic
+  const [shouldShowPassword, setShouldShowPassword] = React.useState(false)
+  const toggleShouldShowPassword = () => {
+    setShouldShowPassword(!shouldShowPassword)
+  }
+
+  const [shouldShowConfirmPassword, setShouldShowConfirmPassword] = React.useState(false)
+  const toggleShouldShowConfirmPassword = () => {
+    setShouldShowConfirmPassword(!shouldShowConfirmPassword)
+  }
+
+  const onSubmit = async (data: ISignupFormData) => {
+    const { name, nickname, email, password } = data
+
+    const newUserRequest = {
+      name,
+      nickname,
+      email,
+      password,
+    }
+
+    try {
+      const {
+        data: { authToken, userId },
+      } = await userService.signUp(newUserRequest)
+
+      const { data: user } = await userService.getUserInfo(userId, userId, authToken!)
+
+      dispatch(loginSuccess({ authToken, user }))
+
+      navigate(AppRoutes.HOME)
+    } catch (error: unknown) {
+      toast.error("Something went wrong, please try again later")
+    }
+  }
+
+  return (
+    <div className={style["signup"]}>
+      <form onSubmit={handleSubmit(onSubmit)} className={style["signup-form"]}>
+        <InputField
+          name={FormFields.NAME}
+          label='Name'
+          additionalErrorCondition={isSubmitted}
+          error={errors.name?.message}
+        >
+          <input
+            {...register(FormFields.NAME)}
+            type={"text"}
+            placeholder={FormExamples.name}
+            className={"input"}
+          />
+        </InputField>
+        <InputField
+          name={FormFields.NICKNAME}
+          label='Nickname'
+          additionalErrorCondition={isSubmitted}
+          error={errors.nickname?.message}
+        >
+          <input
+            {...register(FormFields.NICKNAME)}
+            type={"text"}
+            placeholder={FormExamples.nickname}
+            className={"input"}
+          />
+        </InputField>
+        <InputField
+          name={FormFields.EMAIL}
+          label='Email'
+          additionalErrorCondition={isSubmitted}
+          error={errors.email?.message}
+        >
+          <input
+            {...register(FormFields.EMAIL)}
+            type={"email"}
+            placeholder={FormExamples.email}
+            className={"input"}
+          />
+        </InputField>
+        <InputField
+          name={FormFields.PASSWORD}
+          label='Password'
+          error={errors[FormFields.PASSWORD]?.message}
+          additionalErrorCondition={isSubmitted}
+        >
+          <input
+            {...register(FormFields.PASSWORD)}
+            type={shouldShowPassword ? "text" : "password"}
+            autoComplete='off'
+            className={"input"}
+          />
+          <button type='button' onClick={toggleShouldShowPassword} className={"btn"}>
+            {shouldShowPassword ? <FaEye /> : <FaEyeSlash />}
+          </button>
+        </InputField>
+        <InputField
+          name={FormFields.CONFIRM_PASSWORD}
+          label='Confirm password'
+          error={errors[FormFields.CONFIRM_PASSWORD]?.message}
+          additionalErrorCondition={isSubmitted}
+        >
+          <input
+            {...register(FormFields.CONFIRM_PASSWORD)}
+            type={shouldShowConfirmPassword ? "text" : "password"}
+            autoComplete='off'
+            className={"input"}
+          />
+          <button type='button' onClick={toggleShouldShowConfirmPassword} className={"btn"}>
+            {shouldShowConfirmPassword ? <FaEye /> : <FaEyeSlash />}
+          </button>
+        </InputField>
+        <button type='submit' className={"btn"}>
+          Register
+        </button>
+      </form>
+    </div>
+  )
 }
 
 export { Signup }

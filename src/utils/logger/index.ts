@@ -1,6 +1,6 @@
-import winston from 'winston'
+import winston from "winston"
 
-import { AppConstants } from '../../constants/AppConstants'
+import { AppConstants } from "../../constants/AppConstants"
 
 const logger = winston.createLogger({
   format: winston.format.combine(winston.format.errors({ stack: true }), winston.format.json()),
@@ -14,7 +14,7 @@ const logger = winston.createLogger({
  * If not on production environment the logs 'll also be sent to console
  * `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
  */
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   logger.add(
     new winston.transports.Console({
       format: winston.format.simple(),

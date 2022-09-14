@@ -1,7 +1,7 @@
-import React from 'react'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import * as React from "react"
+import { FaHeart, FaRegHeart } from "react-icons/fa"
 
-import style from './style.module.scss'
+import style from "./style.module.scss"
 
 type ILikeButtonProps = {
   isLiked: boolean
@@ -16,7 +16,7 @@ function LikeButton(props: ILikeButtonProps) {
     <button
       type='button'
       onClick={!isLiked ? like : dislike}
-      className={`${style['like-btn']} ${isLiked && style['like-btn--liked']}`}
+      className={`${style["like-btn"]} ${isLiked && style["like-btn--liked"]}`}
     >
       {isLiked ? <FaHeart /> : <FaRegHeart />}
     </button>

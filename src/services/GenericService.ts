@@ -1,11 +1,11 @@
-import { AxiosResponse } from 'axios'
+import { AxiosResponse } from "axios"
 
-import { ServiceBase } from './base/ServiceBase'
+import { ServiceBase } from "./base/ServiceBase"
 
 class GenericService extends ServiceBase {
   constructor() {
     super({
-      BaseUrl: '',
+      BaseUrl: "",
     })
   }
 
@@ -17,7 +17,7 @@ class GenericService extends ServiceBase {
    */
   public async getFile(filePath: string, fileName: string): Promise<AxiosResponse<File>> {
     const response = await this.http.get<File>(filePath, {
-      responseType: 'blob',
+      responseType: "blob",
       transformResponse: (data: Blob) => new File([data], fileName, { type: data.type }),
     })
 

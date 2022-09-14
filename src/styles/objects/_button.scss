@@ -1,0 +1,14 @@
+@use '../variables/shadows' as S;
+@use '../variables/colors' as C;
+
+.btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid C.$grey-default-lighter;
+  box-shadow: S.$box-shadow-light;
+
+  &:hover {
+    box-shadow: S.$box-shadow-normal;
+    cursor: pointer;
+  }
+}

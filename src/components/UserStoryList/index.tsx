@@ -1,30 +1,29 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useQuery } from 'react-query'
+import * as React from "react"
+import { useSelector } from "react-redux"
+import { useQuery } from "react-query"
 
-import style from './style.module.scss'
-
-import { LazyComponent } from '../LazyComponent'
-import { simpleStoryService } from '../../services/SimpleStoryService'
-import { getAuth } from '../../store/selectors'
-import { IDefaultErrorResponse, IStoryPreview } from '../../types'
-import { StoryList } from '../StoryList'
+import { LazyComponent } from "../LazyComponent"
+import { simpleStoryService } from "../../services/SimpleStoryService"
+import { getAuth } from "../../store/selectors"
+import { StoryList } from "../StoryList"
 
 type IUserStoryListProps = {
-  userId: string
+  userId?: string
 }
 
 function UserStoryList(props: IUserStoryListProps) {
   const { userId } = props
-  const { user: loggedUser, authToken } = useSelector(getAuth)
+  const { user, authToken } = useSelector(getAuth)
 
   const {
     isLoading,
-    data: userStories,
+    data: userStoriesResponse,
     error,
-  } = useQuery<IStoryPreview[], IDefaultErrorResponse>(['user-story-list'], () =>
-    simpleStoryService.getStoriesPreviewByUserId(userId, loggedUser!.id, authToken),
+  } = useQuery(["user-story-list"], () =>
+    simpleStoryService.getStoriesPreviewByUserId(`${userId}`, `${user?.id}`, `${authToken}`),
   )
+
+  const userStories = userStoriesResponse?.data
 
   return (
     <LazyComponent

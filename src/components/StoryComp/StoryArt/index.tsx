@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from "react"
 
-import style from './style.module.scss'
+import style from "./style.module.scss"
 
-import { IStoryFrame, Size } from '../../../types'
+import { IStoryFrame, Size } from "../../../types"
 
 type IStoryArtProps = {
   frame: IStoryFrame
@@ -18,7 +18,7 @@ function StoryArt(props: IStoryArtProps) {
   }
 
   return (
-    <div className={style['art']}>
+    <div className={style["art"]}>
       {frame.content.map((c) =>
         c.images.map((i) => (
           <img key={i.id} src={i.url} alt={i.alt} className={imageSizes[i.size]} />

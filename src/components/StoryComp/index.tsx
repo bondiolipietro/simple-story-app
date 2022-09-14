@@ -1,16 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import * as React from "react"
+import { useSelector } from "react-redux"
+import { useQuery } from "react-query"
 
-import { StoryArt } from './StoryArt'
-import { StoryDescription } from './StoryDescription'
-import { StoryText } from './StoryText'
-import style from './style.module.scss'
+import { StoryArt } from "./StoryArt"
+import { StoryDescription } from "./StoryDescription"
+import { StoryText } from "./StoryText"
+import style from "./style.module.scss"
 
-import { simpleStoryService } from '../../services/SimpleStoryService'
-import { getAuth } from '../../store/selectors'
-import { IStory } from '../../types'
-import { AppRoutes } from '../../constants/AppRoutes'
+import { LazyComponent } from "../LazyComponent"
+import { simpleStoryService } from "../../services/SimpleStoryService"
+import { getAuth } from "../../store/selectors"
 
 type IStoryProps = {
   id: string
@@ -19,9 +18,23 @@ type IStoryProps = {
 }
 
 function StoryComp(props: IStoryProps) {
-  const { id, isShared = false, shareToken = '' } = props
-  const [story, setStory] = React.useState<IStory>()
+  const { id, isShared = false, shareToken = "" } = props
+
+  const { user, authToken } = useSelector(getAuth)
+
   const [currentFramePage, setCurrentFramePage] = React.useState(0)
+
+  const {
+    isLoading,
+    data: storyResponse,
+    error,
+  } = useQuery(["story"], () =>
+    isShared
+      ? simpleStoryService.getStoryUsingShareToken(shareToken, user?.id)
+      : simpleStoryService.getStoryById(id, user!.id, authToken!),
+  )
+
+  const story = storyResponse?.data
 
   const previousFramePage = () => {
     if (currentFramePage > 0) {
@@ -36,38 +49,14 @@ function StoryComp(props: IStoryProps) {
 
   const currentFrame = story?.frames[currentFramePage]
 
-  const authState = useSelector(getAuth)
-
-  React.useEffect(() => {
-    const getStory = async () => {
-      const response = isShared
-        ? await simpleStoryService.getStoryUsingShareToken(
-            shareToken || '',
-            authState.user?.id || '',
-          )
-        : await simpleStoryService.getStoryById(
-            id || '',
-            authState.user?.id || '',
-            authState.authToken || '',
-          )
-
-      console.log(response)
-      setStory(response)
-    }
-
-    getStory()
-  }, [])
-
-  if (!currentFrame) {
-    return <div>Loading</div>
-  }
-
   return (
-    <div className={style['story']}>
-      <StoryArt frame={currentFrame} />
-      <StoryText frame={currentFrame} />
-      <StoryDescription frame={currentFrame} />
-    </div>
+    <LazyComponent isLoading={isLoading} data={story} error={error}>
+      <div className={style["story"]}>
+        <StoryArt frame={currentFrame!} />
+        <StoryText frame={currentFrame!} />
+        <StoryDescription frame={currentFrame!} />
+      </div>
+    </LazyComponent>
   )
 }
 
