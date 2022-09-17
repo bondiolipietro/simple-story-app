@@ -19,7 +19,7 @@ function StoryArt(props: IStoryArtProps) {
 
   return (
     <div className={style["art"]}>
-      {frame.content.map((c) =>
+      {frame.paragraphs.map((c) =>
         c.images.map((i) => (
           <img key={i.id} src={i.url} alt={i.alt} className={imageSizes[i.size]} />
         )),

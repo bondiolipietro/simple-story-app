@@ -1,19 +1,18 @@
-@use '../../styles/utils/mixin' as M;
-@use '../../styles/variables/shadows' as S;
-@use '../../styles/variables/colors' as C;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .story-card {
-  @include M.reset-link;
+  @include reset-link;
   display: grid;
   grid-template-rows: 7fr 1fr;
   gap: 0.5rem;
   border: 1px solid #ccc;
-  box-shadow: S.$box-shadow-light;
+  box-shadow: $box-shadow-light;
   height: 430px;
   width: 100%;
 
   &:hover {
-    box-shadow: S.$box-shadow-normal;
+    box-shadow: $box-shadow-normal;
   }
 
   .header {
@@ -41,26 +40,26 @@
     }
   }
   .footer {
-    @include M.flex-container(row, space-between, center);
+    @include flex-container(row, space-between, center);
     padding: 0.4rem 0.7rem;
 
     .user-avatar {
-      box-shadow: S.$box-shadow-bold;
+      box-shadow: $box-shadow-bold;
 
       &:hover {
-        box-shadow: S.$box-shadow-bolder;
+        box-shadow: $box-shadow-bolder;
       }
     }
 
     .user-link,
     .user-avatar {
-      @include M.size(2.2rem);
+      @include size(2.2rem);
       border-radius: 50%;
     }
   }
 }
 
 .card-actions {
-  @include M.flex-center;
+  @include flex-center;
   gap: 0.5rem;
 }

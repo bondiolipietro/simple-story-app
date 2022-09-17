@@ -60,14 +60,21 @@ export type IMediaContent = {
 
 export type IImageContent = IMediaContent
 
+export type INote = {
+  id: string
+  text: string
+}
+
 export type IStoryFrame = {
+  id: string
   title: string
-  content: Array<IStoryFrameParagraph>
-  notes: Array<string>
+  paragraphs: Array<IStoryFrameParagraph>
+  notes: Array<INote>
 }
 
 export type IStoryFrameParagraph = {
-  content: string
+  id: string
+  text: string
   audio?: IStoryAudio
   images: Array<IStoryImage>
 }
@@ -115,3 +122,38 @@ export type IUserCreateRequest = Omit<
 }
 
 export type IUserUpdateRequest = Partial<IUserInfo>
+
+// ===
+// Create Story
+// ===
+
+export type IMediaCreate = {
+  file?: File
+  alt: string
+}
+
+export type IParagraphCreate = {
+  text: string
+  audio?: IMediaCreate
+  images: Array<IMediaCreate>
+}
+
+export type INoteCreate = {
+  text: string
+}
+
+export type IFrameCreate = {
+  title: string
+  paragraphs: Array<IParagraphCreate>
+  notes: Array<INoteCreate>
+}
+
+export type IStoryCreateForm = {
+  frames: Array<IFrameCreate>
+  info: {
+    title: string
+    description: string
+    image: IMediaCreate
+    private: boolean
+  }
+}

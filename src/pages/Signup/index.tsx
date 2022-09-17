@@ -24,7 +24,7 @@ enum FormFields {
   CONFIRM_PASSWORD = "confirmPassword",
 }
 
-type ISignupFormData = {
+type IFormData = {
   [FormFields.NAME]: string
   [FormFields.NICKNAME]: string
   [FormFields.EMAIL]: string
@@ -38,7 +38,7 @@ const FormExamples = {
   [FormFields.EMAIL]: "john@gmail.com",
 }
 
-const SignupFormSchema = yup
+const FormSchema = yup
   .object({
     [FormFields.NAME]: yup
       .string()
@@ -75,8 +75,8 @@ function Signup() {
     register,
     handleSubmit,
     formState: { errors, isSubmitted },
-  } = useForm<ISignupFormData>({
-    resolver: yupResolver(SignupFormSchema),
+  } = useForm<IFormData>({
+    resolver: yupResolver(FormSchema),
   })
 
   // Show hide password logic
@@ -90,7 +90,7 @@ function Signup() {
     setShouldShowConfirmPassword(!shouldShowConfirmPassword)
   }
 
-  const onSubmit = async (data: ISignupFormData) => {
+  const onSubmit = async (data: IFormData) => {
     const { name, nickname, email, password } = data
 
     const newUserRequest = {

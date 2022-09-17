@@ -1,18 +1,18 @@
-@use '../variables/shadows' as S;
-@use '../variables/colors' as C;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .input {
   height: 100%;
   width: 100%;
   padding: 0.5rem 0.8rem;
-  border: 1px solid C.$white-default-darker;
-  box-shadow: S.$box-shadow-light;
+  border: 1px solid $white-default-darker;
+  box-shadow: $box-shadow-light;
 
   &:hover {
-    box-shadow: S.$box-shadow-normal;
+    box-shadow: $box-shadow-normal;
   }
   &:focus {
-    border: 1px solid C.$grey-default-lighter;
-    box-shadow: S.$box-shadow-normal;
+    border: 1px solid $grey-default-lighter;
+    box-shadow: $box-shadow-normal;
   }
 }

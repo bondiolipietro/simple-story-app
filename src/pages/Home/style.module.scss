@@ -1,7 +1,8 @@
-@use '../../styles/utils/mixin' as M;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .presentation {
-  @include M.flex-center(row);
+  @include flex-center(row);
   gap: 4rem;
 
   &__img {

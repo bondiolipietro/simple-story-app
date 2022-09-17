@@ -1,7 +1,8 @@
-@use '../../styles/utils/mixin' as m;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .story-list {
-  @include m.grid-container(repeat(auto-fill, minmax(256px, 1fr)));
+  @include grid-container(repeat(auto-fill, minmax(256px, 1fr)));
   gap: 1.5rem;
   li {
     width: 100%;

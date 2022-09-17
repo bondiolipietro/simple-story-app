@@ -1,11 +1,12 @@
-@use "../../styles/utils/mixin" as M;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .signup {
-  @include M.flex-center;
+  @include flex-center;
 }
 
 .signup-form {
-  @include M.flex-center(column);
+  @include flex-center(column);
   gap: 1rem;
   width: 320px;
 }

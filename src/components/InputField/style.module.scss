@@ -1,9 +1,9 @@
-@use '../../styles/utils/mixin' as M;
-@use '../../styles/variables/colors' as C;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .field {
-  @include M.flex-container(column, flex-start);
-  @include M.size(100%);
+  @include flex-container(column, flex-start);
+  @include size(100%);
   gap: 0.5rem;
 
   label {
@@ -13,11 +13,11 @@
 }
 
 .input-container {
-  @include M.flex-center;
+  @include flex-center;
 }
 
 .error-msg {
   font-size: 0.9rem;
   padding: 0.4rem 0.2rem;
-  color: C.$red-default-light;
+  color: $red-default-light;
 }

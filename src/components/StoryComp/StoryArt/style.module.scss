@@ -1,7 +1,8 @@
-@use '../../../styles/utils/mixin' as m;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .art {
-  @include m.flex-center;
+  @include flex-center;
   padding: 2rem 4rem;
 }
 

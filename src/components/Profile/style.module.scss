@@ -1,4 +1,5 @@
-@use '../../styles/utils/mixin' as m;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .user-profile {
   display: grid;
@@ -7,7 +8,7 @@
 }
 
 .presentation {
-  @include m.flex-container(column, space-around);
+  @include flex-container(column, space-around);
   padding: 4rem;
   gap: 1rem;
 

@@ -1,11 +1,12 @@
-@use '../../styles/utils/mixin' as M;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .recover-access {
-  @include M.flex-center;
+  @include flex-center;
 }
 
 .recover-access-form {
-  @include M.flex-center(column);
+  @include flex-center(column);
   gap: 1rem;
   width: 320px;
 
@@ -19,8 +20,8 @@
   }
 
   &__field {
-    @include M.flex-container(column, flex-start);
-    @include M.size(100%);
+    @include flex-container(column, flex-start);
+    @include size(100%);
     gap: 0.5rem;
 
     label {

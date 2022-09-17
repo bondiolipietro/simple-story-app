@@ -1,14 +1,14 @@
-@use "./colors" as c;
+@use '@/styles/variables/colors' as *;
 
-$text-shadow-light: 1px 1px 2px c.$black-opaque-light;
-$text-shadow-normal: 1px 1px 3px c.$black-opaque-light;
-$text-shadow-bold: 1px 1px 3px c.$black-opaque-normal;
+$text-shadow-light: 1px 1px 2px $black-opaque-light;
+$text-shadow-normal: 1px 1px 3px $black-opaque-light;
+$text-shadow-bold: 1px 1px 3px $black-opaque-normal;
 
-$box-shadow-light: 1px 1px 2px c.$black-opaque-light;
-$box-shadow-normal: 1px 1px 4px c.$black-opaque-normal;
-$box-shadow-bold: 1px 1px 2px c.$black-opaque-normal;
-$box-shadow-bolder: 1px 1px 4px c.$black-opaque-dark;
+$box-shadow-light: 1px 1px 2px $black-opaque-light;
+$box-shadow-normal: 1px 1px 4px $black-opaque-normal;
+$box-shadow-bold: 1px 1px 2px $black-opaque-normal;
+$box-shadow-bolder: 1px 1px 4px $black-opaque-dark;
 
-$drop-shadow-light: 1px 1px 1px c.$black-opaque-light;
-$drop-shadow-normal: 1px 1px 1px c.$black-opaque-normal;
-$drop-shadow-bold: 1px 1px 1px c.$black-opaque-dark;
+$drop-shadow-light: 1px 1px 1px $black-opaque-light;
+$drop-shadow-normal: 1px 1px 1px $black-opaque-normal;
+$drop-shadow-bold: 1px 1px 1px $black-opaque-dark;

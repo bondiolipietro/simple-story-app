@@ -1,14 +1,46 @@
-@use '../variables/shadows' as S;
-@use '../variables/colors' as C;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .btn {
   padding: 0.5rem 1rem;
   background: none;
-  border: 1px solid C.$grey-default-lighter;
-  box-shadow: S.$box-shadow-light;
+  border: 1px solid $grey-default-lighter;
+  box-shadow: $box-shadow-light;
 
   &:hover {
-    box-shadow: S.$box-shadow-normal;
+    box-shadow: $box-shadow-normal;
     cursor: pointer;
+  }
+}
+
+.orange-btn {
+  @extend .btn;
+  background-color: $orange-default-lighter;
+  &:hover {
+    background-color: $orange-default-normal;
+  }
+}
+
+.red-btn {
+  @extend .btn;
+  background-color: $red-default-lighter;
+  &:hover {
+    background-color: $red-default-light;
+  }
+}
+
+.green-btn {
+  @extend .btn;
+  background-color: $green-default-normal;
+  &:hover {
+    background-color: $green-default-dark;
+  }
+}
+
+.blue-btn {
+  @extend .btn;
+  background-color: $blue-default-light;
+  &:hover {
+    background-color: $blue-default-normal;
   }
 }

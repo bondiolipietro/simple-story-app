@@ -14,8 +14,8 @@ function StoryDescription(props: IStoryDescriptionProps) {
   return (
     <div className={style["description"]}>
       {frame.notes.map((note) => (
-        <div key={note} className={style["note"]}>
-          {note}
+        <div key={note.id} className={style["note"]}>
+          {note.text}
         </div>
       ))}
     </div>

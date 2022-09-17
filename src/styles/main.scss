@@ -1,11 +1,11 @@
 // Base
 @use 'base/base.scss';
 
-// Base
+// Variables
+@use 'variables/variables.scss';
+
+// Objects
 @use 'objects/objects.scss';
 
 // Themes
 @use 'themes/themes.scss';
-
-// Variables
-@use 'variables/variables.scss';

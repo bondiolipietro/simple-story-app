@@ -1,16 +1,16 @@
-@use '../../styles/utils/mixin' as m;
-@use '../../styles/variables/colors' as c;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .share-btn {
-  @include m.flex-center;
+  @include flex-center;
   background: none;
   cursor: pointer;
 
   &:hover {
-    color: c.$blue-default-light;
+    color: $blue-default-light;
   }
 
   svg {
-    @include m.size(1.2rem);
+    @include size(1.2rem);
   }
 }

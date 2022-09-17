@@ -14,7 +14,7 @@ function StoryText(props: IStoryTextProps) {
 
   return (
     <div className={style["text"]}>
-      <TypeAnimation sequence={frame.content.map((c) => c.content)} speed={20} />
+      <TypeAnimation sequence={frame.paragraphs.map((c) => c.text)} speed={20} />
     </div>
   )
 }

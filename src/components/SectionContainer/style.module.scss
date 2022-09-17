@@ -1,7 +1,8 @@
-@use '../../styles/utils/mixin' as m;
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
 
 .section-container {
-  @include m.flex-container(column);
+  @include flex-container(column);
   padding: 6rem 12rem;
   gap: 3rem;
 

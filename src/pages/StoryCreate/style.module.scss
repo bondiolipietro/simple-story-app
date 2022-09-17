@@ -1,0 +1,11 @@
+@use '@/styles/utils/utils' as *;
+@use '@/styles/variables/variables' as *;
+
+.story-create-form {
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.frame {
+  padding: 1rem;
+}
