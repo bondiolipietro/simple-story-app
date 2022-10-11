@@ -1,23 +1,16 @@
 import * as React from "react"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 
-import { AppRoutes } from "../../constants/AppRoutes"
-import { logger } from "../../utils/logger"
+import { AppRoutes } from "@/constants/AppRoutes"
+import { logger } from "@/services/winston-logger"
 
 type IProtectedRouteProps = {
   isAllowed: boolean
   redirectPath?: string
-  children?: any
 }
 
-function ProtectedRoute({
-  isAllowed,
-  redirectPath = AppRoutes.HOME,
-  children,
-}: IProtectedRouteProps) {
+function ProtectedRoute({ isAllowed, redirectPath = AppRoutes.HOME }: IProtectedRouteProps) {
   const location = useLocation()
-
-  console.log("passou aq3")
 
   if (!isAllowed) {
     logger.info("Trying to access {route} without permission.", {
@@ -27,7 +20,7 @@ function ProtectedRoute({
     return <Navigate to={redirectPath} replace />
   }
 
-  return children || <Outlet />
+  return <Outlet />
 }
 
 export { ProtectedRoute }

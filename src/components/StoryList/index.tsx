@@ -1,9 +1,8 @@
 import * as React from "react"
 
-import style from "./style.module.scss"
+import { StoryCard } from "@/components/StoryCard"
 
-import { IStoryPreview } from "../../types"
-import { StoryCard } from "../StoryCard"
+import style from "./style.module.scss"
 
 type IStoryListProps = {
   stories: IStoryPreview[]
@@ -15,7 +14,7 @@ function StoryList(props: IStoryListProps) {
   return (
     <ul className={style["story-list"]}>
       {stories.map((story) => (
-        <li key={story.id}>
+        <li key={story._id}>
           <StoryCard story={story} />
         </li>
       ))}

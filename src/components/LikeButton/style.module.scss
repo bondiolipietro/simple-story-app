@@ -1,20 +1,20 @@
-@use '@/styles/utils/utils' as *;
-@use '@/styles/variables/variables' as *;
+@use "@/styles/utils/utils" as *;
+@use "@/styles/variables/variables" as *;
 
 .like-btn {
-  @include flex-center;
-  background: none;
-  cursor: pointer;
-
-  &:hover {
-    color: $red-default-normal;
-  }
-
   svg {
     @include size(1.2rem);
   }
 
+  button:hover {
+    svg {
+      color: $red-default-normal;
+    }
+  }
+
   &--liked {
-    color: $red-default-normal;
+    svg {
+      color: $red-default-normal;
+    }
   }
 }

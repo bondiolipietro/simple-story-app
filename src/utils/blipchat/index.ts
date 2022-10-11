@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { BlipChatConfig } from "../../config/BlipChatConfig"
+import { BlipChatConfig } from "@/config/blipchat"
 
 const { BlipChat } = require("blip-chat-widget")
 

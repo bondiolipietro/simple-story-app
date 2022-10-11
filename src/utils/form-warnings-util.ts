@@ -1,4 +1,4 @@
-import { StringHelper } from "./StringHelper"
+import { StringHelper } from "./string-util"
 
 class FormWarningsHelper {
   static requiredFieldMsg = (fieldName?: string) => {
@@ -22,15 +22,11 @@ class FormWarningsHelper {
   }
 
   static minLengthMsg = (minLength: number, fieldName?: string) => {
-    return StringHelper.capitalizeFirstLetter(
-      `${fieldName ?? "field"} must be at least ${minLength} characters long`,
-    )
+    return StringHelper.capitalizeFirstLetter(`${fieldName ?? "field"} must be at least ${minLength} characters long`)
   }
 
   static maxLengthMsg = (maxLength: number, fieldName?: string) => {
-    return StringHelper.capitalizeFirstLetter(
-      `${fieldName ?? "field"} must be at most ${maxLength} characters long`,
-    )
+    return StringHelper.capitalizeFirstLetter(`${fieldName ?? "field"} must be at most ${maxLength} characters long`)
   }
 
   static nicknameCharactersMsg = () => {

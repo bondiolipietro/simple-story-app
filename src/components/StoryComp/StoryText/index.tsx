@@ -3,8 +3,6 @@ import { TypeAnimation } from "react-type-animation"
 
 import style from "./style.module.scss"
 
-import { IStoryFrame } from "../../../types"
-
 type IStoryTextProps = {
   frame: IStoryFrame
 }

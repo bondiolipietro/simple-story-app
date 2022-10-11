@@ -1,9 +1,12 @@
-@use '@/styles/utils/utils' as *;
-@use '@/styles/variables/variables' as *;
+@use "@/styles/utils/utils" as *;
+@use "@/styles/variables/variables" as *;
 
 .story-create-form {
+  @include flex-container(column);
+  gap: 1rem;
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: calc(100vh - ($header-heigth + $footer-heigth));
+  padding: 4rem;
 }
 
 .frame {

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { useFormContext } from "react-hook-form"
 
-import style from "./style.module.scss"
+import { AccordionDefault } from "@/components/AccordionDefault"
 
-import { AccordionDefault } from "../../../components/AccordionDefault"
+import style from "./style.module.scss"
 
 type INoteFormProps = {
   frameIndex: number
@@ -23,15 +23,25 @@ function NoteForm(props: INoteFormProps) {
 
   return (
     <AccordionDefault
-      title={`Note Form ${index + 1}`}
+      title={`Note ${index + 1}`}
+      description={`~ Frame ${frameIndex + 1} > Note ${index + 1}`}
       expanded={expanded}
       toggleExpanded={toggleExpanded}
     >
       <div className={style["note-form"]}>
-        <input {...register(`${FIELD_ID}.text`)} type='text' placeholder='note' className='input' />
-        <button type='button' onClick={remove} className='btn'>
-          Remove note
-        </button>
+        <label htmlFor={`${FIELD_ID}.text`}>Text</label>
+        <textarea
+          {...register(`${FIELD_ID}.text`)}
+          maxLength={512}
+          rows={4}
+          placeholder='note'
+          className='input disable-resize'
+        />
+        <div className={style["form-actions"]}>
+          <button type='button' onClick={remove} className='red-btn'>
+            Remove note
+          </button>
+        </div>
       </div>
     </AccordionDefault>
   )

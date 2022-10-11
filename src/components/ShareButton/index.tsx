@@ -1,6 +1,6 @@
 import * as React from "react"
 import { FaShareAlt } from "react-icons/fa"
-import { Tooltip } from "@mui/material"
+import { IconButton, Tooltip } from "@mui/material"
 
 import style from "./style.module.scss"
 
@@ -24,15 +24,14 @@ function ShareButton(props: IShareButtonProps) {
   }
 
   return (
-    <Tooltip
-      title={tooltipText}
-      arrow
-      onOpen={() => setTooltipText(INTERACTIONS.COPY)}
-      leaveTouchDelay={0}
-    >
-      <button type='button' className={style["share-btn"]} onClick={copyHrefToClipboard}>
-        <FaShareAlt />
-      </button>
+    <Tooltip title={tooltipText} arrow onOpen={() => setTooltipText(INTERACTIONS.COPY)} leaveTouchDelay={0}>
+      <span className={style["share-btn"]}>
+        <IconButton onClick={copyHrefToClipboard}>
+          {/* <button type='button' className={style["share-btn"]} > */}
+          <FaShareAlt />
+          {/* </button> */}
+        </IconButton>
+      </span>
     </Tooltip>
   )
 }

@@ -3,9 +3,8 @@ import { configureStore } from "@reduxjs/toolkit"
 import { persistStore } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
-import { reducer as authReducer } from "./slices/auth"
-
-import { IRootState } from "../types"
+import { IRootState } from "@/store/selectors"
+import { reducer as authReducer } from "@/store/slices/auth"
 
 const appReducer: Reducer<IRootState> = combineReducers<IRootState>({
   authState: authReducer,

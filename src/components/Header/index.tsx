@@ -1,11 +1,11 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
 
-import { Navbar } from "./Navbar"
-import style from "./style.module.scss"
+import magicBookImg from "@/assets/img/magic-book.png"
+import { Navbar } from "@/components/Header/Navbar"
+import { AppRoutes } from "@/constants/AppRoutes"
 
-import { AppRoutes } from "../../constants/AppRoutes"
-import magicBookImg from "../../assets/img/magic-book.png"
+import style from "./style.module.scss"
 
 function Header() {
   return (

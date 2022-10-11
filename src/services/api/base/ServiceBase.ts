@@ -1,8 +1,9 @@
-import axios, { AxiosInstance } from "axios"
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 
 interface IConstructorProps {
   BaseUrl?: string
   BasePath?: string
+  AdditionalConfig?: Partial<AxiosRequestConfig>
 }
 
 /**
@@ -20,14 +21,14 @@ abstract class ServiceBase {
 
   protected ACCEPTED_CONTENT_HEADER = "application/json"
 
-  protected EMPTY_PATH = ""
+  protected EMPTY_PATH = "/"
 
   protected REQUEST_EMPTY_BODY = {}
 
-  public constructor({ BaseUrl = "", BasePath = "" }: IConstructorProps) {
+  public constructor({ BaseUrl = "", BasePath = "", AdditionalConfig = {} }: IConstructorProps) {
     const serviceUrl = BaseUrl + BasePath
 
-    this.http = axios.create({ baseURL: serviceUrl })
+    this.http = axios.create({ baseURL: serviceUrl, ...AdditionalConfig })
 
     this.http.defaults.headers.common[this.ACCEPT_HEADER_NAME] = this.ACCEPTED_CONTENT_HEADER
     this.http.defaults.headers.common[this.CONTENT_TYPE_HEADER_NAME] = this.ACCEPTED_CONTENT_HEADER

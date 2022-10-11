@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import { Error } from "../Error"
-import { Loading } from "../Loading"
-import { ErrorHelper } from "../../utils/ErrorHelper"
+import { Error } from "@/components/Error"
+import { Loading } from "@/components/Loading"
+import { ErrorHelper } from "@/utils/error-util"
 
 type ILazyComponentProps = {
   isLoading: boolean

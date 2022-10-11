@@ -1,11 +1,10 @@
 import * as React from "react"
 import { useFieldArray, useFormContext } from "react-hook-form"
 
-import style from "./style.module.scss"
+import { ImageForm } from "@/pages/StoryCreate/ImageForm"
+import { AccordionDefault } from "@/components/AccordionDefault"
 
-import { ImageForm } from "../ImageForm"
-import { AccordionDefault } from "../../../components/AccordionDefault"
-import { IMediaCreate } from "../../../types"
+import style from "./style.module.scss"
 
 type IParagraphFormProps = {
   frameIndex: number
@@ -38,45 +37,39 @@ function ParagraphForm(props: IParagraphFormProps) {
 
   return (
     <AccordionDefault
-      title={`Paragraph Form ${index + 1}`}
+      title={`Paragraph ${index + 1}`}
+      description={`~ Frame ${frameIndex + 1} > Paragraph ${index + 1}`}
       expanded={expanded}
       toggleExpanded={toggleExpanded}
     >
       <div className={style["paragraph-form"]}>
-        <div>
-          <input
-            {...register(`${FIELD_ID}.text`)}
-            type='text'
-            placeholder='paragraph text'
-            className='input'
+        <label htmlFor={`${FIELD_ID}.text`}>Text</label>
+        <textarea
+          {...register(`${FIELD_ID}.text`)}
+          maxLength={2048}
+          rows={6}
+          placeholder='paragraph text'
+          className='input disable-resize'
+        />
+        <label htmlFor={`${FIELD_ID}.audio`}>Audio</label>
+        <input {...register(`${FIELD_ID}.audio`)} type='file' accept='audio/*' className='input' />
+        {imageFields.map((frame, i) => (
+          <ImageForm
+            key={frame.id}
+            frameIndex={frameIndex}
+            paragraphIndex={index}
+            index={i}
+            remove={() => removeImage(i)}
           />
-        </div>
-        <div>
-          <input
-            {...register(`${FIELD_ID}.audio`)}
-            type='file'
-            accept='audio/*'
-            placeholder='paragraph audio'
-            className='input'
-          />
-        </div>
-        <div>
-          {imageFields.map((frame, i) => (
-            <ImageForm
-              key={frame.key}
-              frameIndex={frameIndex}
-              paragraphIndex={index}
-              index={i}
-              remove={() => removeImage(i)}
-            />
-          ))}
-          <button type='button' onClick={() => addImage(DEFAULT_IMAGE)} className='btn'>
+        ))}
+        <div className={style["form-actions"]}>
+          <button type='button' onClick={() => addImage(DEFAULT_IMAGE)} className='blue-btn'>
             Add image
           </button>
+          <button type='button' onClick={remove} className='red-btn'>
+            Remove paragraph
+          </button>
         </div>
-        <button type='button' onClick={remove} className='btn'>
-          Remove paragraph
-        </button>
       </div>
     </AccordionDefault>
   )

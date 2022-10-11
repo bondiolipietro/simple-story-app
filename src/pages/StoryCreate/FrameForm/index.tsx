@@ -1,12 +1,11 @@
 import * as React from "react"
 import { useFieldArray, useFormContext } from "react-hook-form"
 
-import style from "./style.module.scss"
+import { AccordionDefault } from "@/components/AccordionDefault"
+import { ParagraphForm } from "@/pages/StoryCreate/ParagraphForm"
+import { NoteForm } from "@/pages/StoryCreate/NoteForm"
 
-import { ParagraphForm } from "../ParagraphForm"
-import { NoteForm } from "../NoteForm"
-import { IParagraphCreate } from "../../../types"
-import { AccordionDefault } from "../../../components/AccordionDefault"
+import style from "./style.module.scss"
 
 type IFrameFormProps = {
   index: number
@@ -49,44 +48,28 @@ function FrameForm(props: IFrameFormProps) {
   })
 
   return (
-    <AccordionDefault
-      title={`Frame Form ${index + 1}`}
-      expanded={expanded}
-      toggleExpanded={toggleExpanded}
-    >
+    <AccordionDefault title={`Frame ${index + 1}`} expanded={expanded} toggleExpanded={toggleExpanded}>
       <div className={style["frame-form"]}>
         <div>
-          <input
-            {...register(`${FIELD_ID}.title`)}
-            type='text'
-            placeholder='frame title'
-            className='input'
-          />
+          <input {...register(`${FIELD_ID}.title`)} type='text' placeholder='frame title' className='input' />
         </div>
-        <div>
-          {paragraphFields.map((frame, i) => (
-            <ParagraphForm
-              key={frame.key}
-              frameIndex={index}
-              index={i}
-              remove={() => removeParagraph(i)}
-            />
-          ))}
-          <button type='button' onClick={() => addParagraph(DEFAULT_PARAGRAPH)} className='btn'>
+        {paragraphFields.map((frame, i) => (
+          <ParagraphForm key={frame.id} frameIndex={index} index={i} remove={() => removeParagraph(i)} />
+        ))}
+        {noteFields.map((frame, i) => (
+          <NoteForm key={frame.id} frameIndex={index} index={i} remove={() => removeNote(i)} />
+        ))}
+        <div className={style["form-actions"]}>
+          <button type='button' onClick={() => addParagraph(DEFAULT_PARAGRAPH)} className='blue-btn'>
             Add paragraph
           </button>
-        </div>
-        <div>
-          {noteFields.map((frame, i) => (
-            <NoteForm key={frame.key} frameIndex={index} index={i} remove={() => removeNote(i)} />
-          ))}
-          <button type='button' onClick={() => addNote(DEFAULT_NOTE)} className='btn'>
+          <button type='button' onClick={() => addNote(DEFAULT_NOTE)} className='blue-btn'>
             Add note
           </button>
+          <button type='button' onClick={remove} className='red-btn'>
+            Remove frame
+          </button>
         </div>
-        <button type='button' onClick={remove} className='btn'>
-          Remove frame
-        </button>
       </div>
     </AccordionDefault>
   )

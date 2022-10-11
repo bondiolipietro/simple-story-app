@@ -2,18 +2,17 @@ import * as React from "react"
 import { generatePath, Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-import style from "./style.module.scss"
+import { AppRoutes } from "@/constants/AppRoutes"
+import { ShareButton } from "@/components/ShareButton"
+import { LikeButton } from "@/components/LikeButton"
+import { getAuth } from "@/store/selectors"
+import { userService } from "@/services/api/user-service"
+import { WebAppHelper } from "@/utils/webapp-util"
+import { StringHelper } from "@/utils/string-util"
+import { ToastsHelper } from "@/utils/toast-util"
+import { simpleStoryService } from "@/services/api/story-service"
 
-import { IStoryPreview, IUserPreview } from "../../types"
-import { AppRoutes } from "../../constants/AppRoutes"
-import { simpleStoryService } from "../../services/SimpleStoryService"
-import { getAuth } from "../../store/selectors"
-import { userService } from "../../services/UserService"
-import { WebAppHelper } from "../../utils/WebAppHelper"
-import { ShareButton } from "../ShareButton"
-import { LikeButton } from "../LikeButton"
-import { StringHelper } from "../../utils/StringHelper"
-import { ToastsHelper } from "../../utils/ToastsHelper"
+import style from "./style.module.scss"
 
 type IStoryCardProps = {
   story: IStoryPreview
@@ -21,10 +20,10 @@ type IStoryCardProps = {
 
 function StoryCard(props: IStoryCardProps) {
   const { story } = props
-  const { isAuthenticated, user, authToken } = useSelector(getAuth)
-  const storyUrl = WebAppHelper.getHostName() + generatePath(AppRoutes.STORY, { id: story.id })
+  const { isAuthenticated } = useSelector(getAuth)
+  const storyUrl = WebAppHelper.getHostName() + generatePath(AppRoutes.STORY, { id: story._id })
 
-  const [author, setAuthor] = React.useState<IUserPreview>()
+  const [author, setAuthor] = React.useState<IPublicUserInfo>()
 
   const [userLiked, setUserLiked] = React.useState(false)
 
@@ -34,7 +33,7 @@ function StoryCard(props: IStoryCardProps) {
 
       return
     }
-    await simpleStoryService.likeStory(story.id, user!.id, authToken!)
+    await simpleStoryService.likeStory(story._id)
     setUserLiked(true)
   }
 
@@ -44,53 +43,41 @@ function StoryCard(props: IStoryCardProps) {
 
       return
     }
-    await simpleStoryService.removeLikeFromStory(story.id, user!.id, authToken!)
+    await simpleStoryService.dislikeStory(story._id)
     setUserLiked(false)
   }
 
   React.useEffect(() => {
-    const getUserLiked = async () => {
-      const response = await simpleStoryService.getStoryLikedBy(
-        story.id,
-        user!.id,
-        user!.id,
-        authToken!,
-      )
+    // const getUserLiked = async () => {
+    //   const response = await simpleStoryService.getStoryLikedBy(story.id, user!.id, user!.id, authToken!)
 
-      setUserLiked(response.data)
-    }
+    //   setUserLiked(response.data)
+    // }
     const getAuthor = async () => {
-      const response = await userService.getUserPreview(story.info.authorId)
+      const response = await userService.getUserPreviewById(story.info.author)
 
       setAuthor(response.data)
     }
 
     getAuthor()
-    if (isAuthenticated) {
-      getUserLiked()
-    }
+    // if (isAuthenticated) {
+    //   getUserLiked()
+    // }
   }, [])
 
   return (
     <div className={style["story-card"]}>
-      <Link to={generatePath(AppRoutes.STORY, { id: story.id })} className={style["header"]}>
+      <Link to={generatePath(AppRoutes.STORY, { id: story._id })} className={style["header"]}>
         <img src={story.info.image.url} className={style["img"]} alt={story.info.image.alt} />
-        <div className={style["title"]}>
-          {StringHelper.truncateTextWithEllipsis(story.info.title, 128)}
-        </div>
-        <div className={style["desc"]}>
-          {StringHelper.truncateTextWithEllipsis(story.info.description, 196)}
-        </div>
+        <div className={style["title"]}>{StringHelper.truncateTextWithEllipsis(story.info.title, 128)}</div>
+        <div className={style["desc"]}>{StringHelper.truncateTextWithEllipsis(story.info.description, 196)}</div>
       </Link>
       <div className={style["footer"]}>
         <div className={style["card-actions"]}>
           <LikeButton isLiked={userLiked} like={likeStory} dislike={removeLikeFromStory} />
           <ShareButton url={storyUrl} />
         </div>
-        <Link
-          to={generatePath(AppRoutes.USER_PROFILE, { id: author?.id ?? "" })}
-          className={style["user-link"]}
-        >
+        <Link to={generatePath(AppRoutes.USER_PROFILE, { id: author?._id ?? "" })} className={style["user-link"]}>
           <img src={author?.avatar.url} className={style["user-avatar"]} alt={author?.avatar.alt} />
         </Link>
       </div>

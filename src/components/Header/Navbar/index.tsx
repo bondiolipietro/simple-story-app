@@ -3,10 +3,10 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { RiLogoutBoxRLine } from "react-icons/ri"
 
-import style from "./style.module.scss"
+import { AppRoutes } from "@/constants/AppRoutes"
+import { getAuth } from "@/store/selectors"
 
-import { AppRoutes } from "../../../constants/AppRoutes"
-import { getAuth } from "../../../store/selectors"
+import style from "./style.module.scss"
 
 function Navbar() {
   const { isAuthenticated } = useSelector(getAuth)

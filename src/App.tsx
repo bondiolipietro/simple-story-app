@@ -5,12 +5,12 @@ import { PersistGate } from "redux-persist/integration/react"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { QueryClientProvider } from "react-query"
 
-import { ToastifyConfig } from "./config/ToastifyConfig"
-import { AppRouter } from "./router"
-import { persistedStore, store } from "./store"
-import { blipchat } from "./utils/blipchat"
-import { logger } from "./utils/logger"
-import { queryClient } from "./utils/react-query"
+import { ToastifyConfig } from "@/config/toastify"
+import { AppRouter } from "@/router/router"
+import { persistedStore, store } from "@/store/index"
+import { logger } from "@/services/winston-logger"
+import { queryClient } from "@/services/react-query-client"
+import { blipchat } from "@/utils/blipchat"
 
 import "react-toastify/dist/ReactToastify.min.css"
 

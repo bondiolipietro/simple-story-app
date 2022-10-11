@@ -13,8 +13,19 @@
   }
 }
 
-.orange-btn {
+.colored-btn {
   @extend .btn;
+  background: $red-default-normal;
+  color: $white-default-normal;
+  border: none;
+
+  &:hover {
+    background: $red-default-lighter;
+  }
+}
+
+.orange-btn {
+  @extend .colored-btn;
   background-color: $orange-default-lighter;
   &:hover {
     background-color: $orange-default-normal;
@@ -22,23 +33,23 @@
 }
 
 .red-btn {
-  @extend .btn;
-  background-color: $red-default-lighter;
+  @extend .colored-btn;
+  background-color: $red-default-light;
   &:hover {
-    background-color: $red-default-light;
+    background-color: $red-default-normal;
   }
 }
 
 .green-btn {
-  @extend .btn;
-  background-color: $green-default-normal;
+  @extend .colored-btn;
+  background-color: $green-default-dark;
   &:hover {
-    background-color: $green-default-dark;
+    background-color: $green-default-darker;
   }
 }
 
 .blue-btn {
-  @extend .btn;
+  @extend .colored-btn;
   background-color: $blue-default-light;
   &:hover {
     background-color: $blue-default-normal;

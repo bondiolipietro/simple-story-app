@@ -15,11 +15,7 @@ function AccordionDefault(props: IAccordionDefaultProps) {
 
   return (
     <Accordion expanded={expanded} onChange={toggleExpanded}>
-      <AccordionSummary
-        expandIcon={<MdExpandMore />}
-        aria-controls='panel1bh-content'
-        id='panel1bh-header'
-      >
+      <AccordionSummary expandIcon={<MdExpandMore />}>
         <Typography sx={{ width: "33%", flexShrink: 0 }}>{title}</Typography>
         <Typography sx={{ color: "text.secondary" }}>{description}</Typography>
       </AccordionSummary>

@@ -1,10 +1,10 @@
 import * as React from "react"
 import { Outlet } from "react-router-dom"
 
-import style from "./style.module.scss"
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 
-import { Header } from "../Header"
-import { Footer } from "../Footer"
+import style from "./style.module.scss"
 
 function DefaultLayout() {
   return (

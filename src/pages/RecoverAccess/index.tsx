@@ -4,10 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from "react-toastify"
 
-import style from "./style.module.scss"
+import { userService } from "@/services/api/user-service"
+import { FormWarningsHelper } from "@/utils/form-warnings-util"
+import { authService } from "@/services/api/auth-service"
 
-import { userService } from "../../services/UserService"
-import { FormWarningsHelper } from "../../utils/FormWarningsHelper"
+import style from "./style.module.scss"
 
 enum FormFields {
   EMAIL = "email",
@@ -44,7 +45,7 @@ function RecoverAccess() {
     const { email } = data
 
     try {
-      await userService.recoverPassword(email)
+      await authService.sendRecoverPasswordEmail(email)
 
       toast.info(`An recovery link will be sent to ${email} if it's a valid email`)
     } catch (error: unknown) {
@@ -63,11 +64,7 @@ function RecoverAccess() {
         </div>
         <div className={style["recover-access-form__field"]}>
           <label htmlFor={FormFields.EMAIL}>Email</label>
-          <input
-            {...register(FormFields.EMAIL)}
-            placeholder={FormExamples[FormFields.EMAIL]}
-            className={"input"}
-          />
+          <input {...register(FormFields.EMAIL)} placeholder={FormExamples[FormFields.EMAIL]} className={"input"} />
           {isSubmitted && errors[FormFields.EMAIL]?.message && (
             <span className={style["error-msg"]}>{errors[FormFields.EMAIL]?.message}</span>
           )}

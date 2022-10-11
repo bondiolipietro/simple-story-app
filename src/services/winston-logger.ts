@@ -1,12 +1,11 @@
 import winston from "winston"
 
-import { AppConstants } from "../../constants/AppConstants"
+import { AppConstants } from "../constants/AppConstants"
 
 const logger = winston.createLogger({
   format: winston.format.combine(winston.format.errors({ stack: true }), winston.format.json()),
   defaultMeta: {
     application: AppConstants.APPLICATION_NAME,
-    vendor: process.env.VENDOR_NAME,
   },
 })
 

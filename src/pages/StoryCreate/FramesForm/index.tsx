@@ -1,8 +1,7 @@
 import * as React from "react"
 import { useFieldArray } from "react-hook-form"
 
-import { IFrameCreate } from "../../../types"
-import { FrameForm } from "../FrameForm"
+import { FrameForm } from "@/pages/StoryCreate/FrameForm"
 
 const DEFAULT_FRAME: IFrameCreate = {
   title: "",
@@ -22,9 +21,9 @@ function FramesForm() {
   return (
     <>
       {frameFields.map((frame, i) => (
-        <FrameForm key={frame.key} index={i} remove={() => removeFrame(i)} />
+        <FrameForm key={frame.id} index={i} remove={() => removeFrame(i)} />
       ))}
-      <button type='button' onClick={() => addFrame(DEFAULT_FRAME)} className='btn'>
+      <button type='button' onClick={() => addFrame(DEFAULT_FRAME)} className='blue-btn'>
         Add frame
       </button>
     </>

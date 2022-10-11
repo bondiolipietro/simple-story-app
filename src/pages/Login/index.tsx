@@ -7,14 +7,15 @@ import { Link, useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { toast } from "react-toastify"
 
-import style from "./style.module.scss"
+import { AppRoutes } from "@/constants/AppRoutes"
+import { InputField } from "@/components/InputField"
+import { loginSuccess } from "@/store/slices/auth"
+import { userService } from "@/services/api/user-service"
+import { ErrorHelper } from "@/utils/error-util"
+import { FormWarningsHelper } from "@/utils/form-warnings-util"
+import { authService } from "@/services/api/auth-service"
 
-import { userService } from "../../services/UserService"
-import { loginSuccess } from "../../store/slices/auth"
-import { AppRoutes } from "../../constants/AppRoutes"
-import { ErrorHelper } from "../../utils/ErrorHelper"
-import { InputField } from "../../components/InputField"
-import { FormWarningsHelper } from "../../utils/FormWarningsHelper"
+import style from "./style.module.scss"
 
 enum FormFields {
   EMAIL = "email",
@@ -67,13 +68,13 @@ function Login() {
     const { email, password } = data
 
     try {
-      const loginResponse = await userService.login(email, password)
+      const loginResponse = await authService.login(email, password)
 
-      const { authToken, userId } = loginResponse.data
+      const { _id } = loginResponse.data
 
-      const { data: user } = await userService.getUserInfo(userId, userId, authToken!)
+      const { data: user } = await userService.getUserById(_id)
 
-      dispatch(loginSuccess({ authToken, user }))
+      dispatch(loginSuccess({ user }))
 
       navigate(AppRoutes.HOME)
     } catch (error: unknown) {
@@ -95,12 +96,7 @@ function Login() {
           additionalErrorCondition={isSubmitted}
           error={errors.email?.message}
         >
-          <input
-            {...register(FormFields.EMAIL)}
-            type={"email"}
-            placeholder={FormExamples.email}
-            className={"input"}
-          />
+          <input {...register(FormFields.EMAIL)} type={"email"} placeholder={FormExamples.email} className={"input"} />
         </InputField>
         <InputField
           name={FormFields.PASSWORD}

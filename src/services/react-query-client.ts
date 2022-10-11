@@ -1,6 +1,6 @@
 import { QueryClient, setLogger } from "react-query"
 
-import { logger } from "../logger"
+import { logger } from "@/services/winston-logger"
 
 const queryClient = new QueryClient()
 

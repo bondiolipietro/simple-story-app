@@ -1,4 +1,7 @@
+@use "@/styles/utils/utils" as *;
+@use "@/styles/variables/variables" as *;
+
 .info-form {
-  border: 2px solid black;
-  padding: 2rem;
+  @include flex-container(column);
+  gap: 1rem;
 }

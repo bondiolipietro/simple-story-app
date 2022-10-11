@@ -7,14 +7,14 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 
-import style from "./style.module.scss"
+import { AppRoutes } from "@/constants/AppRoutes"
+import { InputField } from "@/components/InputField"
+import { loginSuccess } from "@/store/slices/auth"
+import { userService } from "@/services/api/user-service"
+import { StringHelper } from "@/utils/string-util"
+import { FormWarningsHelper } from "@/utils/form-warnings-util"
 
-import { userService } from "../../services/UserService"
-import { AppRoutes } from "../../constants/AppRoutes"
-import { loginSuccess } from "../../store/slices/auth"
-import { InputField } from "../../components/InputField"
-import { StringHelper } from "../../utils/StringHelper"
-import { FormWarningsHelper } from "../../utils/FormWarningsHelper"
+import style from "./style.module.scss"
 
 enum FormFields {
   NAME = "name",
@@ -102,12 +102,12 @@ function Signup() {
 
     try {
       const {
-        data: { authToken, userId },
-      } = await userService.signUp(newUserRequest)
+        data: { _id },
+      } = await userService.register(newUserRequest)
 
-      const { data: user } = await userService.getUserInfo(userId, userId, authToken!)
+      const { data: user } = await userService.getUserById(_id)
 
-      dispatch(loginSuccess({ authToken, user }))
+      dispatch(loginSuccess({ user }))
 
       navigate(AppRoutes.HOME)
     } catch (error: unknown) {
@@ -124,12 +124,7 @@ function Signup() {
           additionalErrorCondition={isSubmitted}
           error={errors.name?.message}
         >
-          <input
-            {...register(FormFields.NAME)}
-            type={"text"}
-            placeholder={FormExamples.name}
-            className={"input"}
-          />
+          <input {...register(FormFields.NAME)} type={"text"} placeholder={FormExamples.name} className={"input"} />
         </InputField>
         <InputField
           name={FormFields.NICKNAME}
@@ -150,12 +145,7 @@ function Signup() {
           additionalErrorCondition={isSubmitted}
           error={errors.email?.message}
         >
-          <input
-            {...register(FormFields.EMAIL)}
-            type={"email"}
-            placeholder={FormExamples.email}
-            className={"input"}
-          />
+          <input {...register(FormFields.EMAIL)} type={"email"} placeholder={FormExamples.email} className={"input"} />
         </InputField>
         <InputField
           name={FormFields.PASSWORD}

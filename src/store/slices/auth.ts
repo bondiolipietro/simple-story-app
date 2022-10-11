@@ -4,14 +4,17 @@ import { persistReducer } from "redux-persist"
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2"
 import expireReducer from "redux-persist-expire"
 
-import { IAuthState, IUserInfo } from "../../types"
-
 const STATE_NAME = "auth"
+
+export type IAuthState = {
+  user?: IUserInfo
+  isAuthenticated: boolean
+  error?: Error
+}
 
 const initialState: IAuthState = {
   user: undefined,
   isAuthenticated: false,
-  authToken: undefined,
   error: undefined,
 }
 
@@ -19,12 +22,8 @@ const authSlice = createSlice({
   name: STATE_NAME,
   initialState,
   reducers: {
-    loginSuccess: (
-      state: IAuthState,
-      { payload }: PayloadAction<{ authToken: string; user: IUserInfo }>,
-    ) => {
-      const { authToken, user } = payload
-      state.authToken = authToken
+    loginSuccess: (state: IAuthState, { payload }: PayloadAction<{ user: IUserInfo }>) => {
+      const { user } = payload
       state.user = user
       state.isAuthenticated = true
     },

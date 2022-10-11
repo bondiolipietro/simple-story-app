@@ -1,9 +1,9 @@
 import * as React from "react"
 import { useFormContext } from "react-hook-form"
 
-import style from "./style.module.scss"
+import { AccordionDefault } from "@/components/AccordionDefault"
 
-import { AccordionDefault } from "../../../components/AccordionDefault"
+import style from "./style.module.scss"
 
 type IImageFormProps = {
   frameIndex: number
@@ -24,25 +24,15 @@ function ImageForm(props: IImageFormProps) {
 
   return (
     <AccordionDefault
-      title={`Image Form ${index + 1}`}
+      title={`Image ${index + 1}`}
+      description={`~ Frame ${frameIndex + 1} > Paragraph ${paragraphIndex + 1} > Image ${index + 1}`}
       expanded={expanded}
       toggleExpanded={toggleExpanded}
     >
       <div className={style["image-form"]}>
-        <input
-          {...register(`${FIELD_ID}.file`)}
-          type='file'
-          accept='image/*'
-          placeholder='image'
-          className='input'
-        />
-        <input
-          {...register(`${FIELD_ID}.alt`)}
-          type='text'
-          placeholder='image alt'
-          className='input'
-        />
-        <button type='button' onClick={remove} className='btn'>
+        <input {...register(`${FIELD_ID}.file`)} type='file' accept='image/*' placeholder='image' className='input' />
+        <input {...register(`${FIELD_ID}.alt`)} type='text' placeholder='image alt' className='input' />
+        <button type='button' onClick={remove} className='red-btn'>
           Remove image
         </button>
       </div>

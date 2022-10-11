@@ -4,7 +4,6 @@ const webpack = require("webpack")
 
 const path = require("path")
 
-
 module.exports = function override(config, env) {
   const alias = config.resolve.fallback || {}
   Object.assign(alias, {
@@ -12,14 +11,11 @@ module.exports = function override(config, env) {
     "@/components": path.resolve(__dirname, "../src/components"),
     "@/config": path.resolve(__dirname, "../src/config"),
     "@/constants": path.resolve(__dirname, "../src/constants"),
-    "@/contexts": path.resolve(__dirname, "../src/contexts"),
-    "@/hooks": path.resolve(__dirname, "../src/hooks"),
     "@/pages": path.resolve(__dirname, "../src/pages"),
     "@/router": path.resolve(__dirname, "../src/router"),
     "@/services": path.resolve(__dirname, "../src/services"),
-    "@/state": path.resolve(__dirname, "../src/state"),
+    "@/store": path.resolve(__dirname, "../src/store"),
     "@/styles": path.resolve(__dirname, "../src/styles"),
-    "@/types": path.resolve(__dirname, "../src/types/index.tsx"),
     "@/utils": path.resolve(__dirname, "../src/utils"),
     stream: "stream-browserify",
     path: "path-browserify",

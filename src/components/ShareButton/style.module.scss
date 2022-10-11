@@ -1,16 +1,14 @@
-@use '@/styles/utils/utils' as *;
-@use '@/styles/variables/variables' as *;
+@use "@/styles/utils/utils" as *;
+@use "@/styles/variables/variables" as *;
 
 .share-btn {
-  @include flex-center;
-  background: none;
-  cursor: pointer;
-
-  &:hover {
-    color: $blue-default-light;
-  }
-
   svg {
     @include size(1.2rem);
+  }
+
+  button:hover {
+    svg {
+      color: $blue-default-light;
+    }
   }
 }

@@ -1,8 +1,6 @@
-import { IDefaultResponse, ResponseStatus, Size } from "../types"
-
-export const createTestResponse = <T>(data: T): IDefaultResponse<T> => ({
-  status: ResponseStatus.SUCCESS,
-  message: "Success",
+export const createTestResponse = <T>(data: T): DefaultResponse<T> => ({
+  status: "success",
+  message: "success",
   data,
 })
 
@@ -86,7 +84,6 @@ export const testData = {
                 title: "img titulo",
                 url: "https://cptstatic.s3.amazonaws.com/imagens/enviadas/materias/materia16043/caracteristicas-cavalos-saudaveis-artigos-cursos-cpt.jpg",
                 alt: "",
-                size: Size.MEDIUM,
               },
             ],
           },
@@ -109,7 +106,6 @@ export const testData = {
                 title: "img titulo",
                 url: "https://super.abril.com.br/wp-content/uploads/2022/07/SI_441_ORCL_potencia_site.jpg",
                 alt: "",
-                size: Size.MEDIUM,
               },
             ],
           },
@@ -179,7 +175,7 @@ export const testData = {
     userId: "1",
   },
   defaultError: {
-    status: ResponseStatus.ERROR,
+    status: "error",
     message:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum",
   },

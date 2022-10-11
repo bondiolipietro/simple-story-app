@@ -2,14 +2,14 @@ import * as React from "react"
 import { useSelector } from "react-redux"
 import { useQuery } from "react-query"
 
-import { StoryArt } from "./StoryArt"
-import { StoryDescription } from "./StoryDescription"
-import { StoryText } from "./StoryText"
-import style from "./style.module.scss"
+import { StoryArt } from "@/components/StoryComp/StoryArt"
+import { StoryDescription } from "@/components/StoryComp/StoryDescription"
+import { StoryText } from "@/components/StoryComp/StoryText"
+import { LazyComponent } from "@/components/LazyComponent"
+import { simpleStoryService } from "@/services/api/story-service"
+import { getAuth } from "@/store/selectors"
 
-import { LazyComponent } from "../LazyComponent"
-import { simpleStoryService } from "../../services/SimpleStoryService"
-import { getAuth } from "../../store/selectors"
+import style from "./style.module.scss"
 
 type IStoryProps = {
   id: string
@@ -20,8 +20,6 @@ type IStoryProps = {
 function StoryComp(props: IStoryProps) {
   const { id, isShared = false, shareToken = "" } = props
 
-  const { user, authToken } = useSelector(getAuth)
-
   const [currentFramePage, setCurrentFramePage] = React.useState(0)
 
   const {
@@ -29,9 +27,7 @@ function StoryComp(props: IStoryProps) {
     data: storyResponse,
     error,
   } = useQuery(["story"], () =>
-    isShared
-      ? simpleStoryService.getStoryUsingShareToken(shareToken, user?.id)
-      : simpleStoryService.getStoryById(id, user!.id, authToken!),
+    isShared ? simpleStoryService.getStoryUsingShareToken(shareToken) : simpleStoryService.getStoryById(id),
   )
 
   const story = storyResponse?.data
