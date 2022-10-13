@@ -1,8 +1,8 @@
 import * as React from "react"
 import { useFormContext } from "react-hook-form"
 
-import { FormWarningsHelper } from "@/utils/form-warnings-util"
 import { FormErrorMsg } from "@/components/FormErrorMsg"
+import { FormUtil } from "@/utils/form-util"
 
 import style from "./style.module.scss"
 
@@ -14,21 +14,27 @@ function InfoForm() {
     formState: { errors },
   } = useFormContext()
 
+  const titleError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.title`)
+  const descriptionError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.description`)
+  const imageFileError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.image.file`)
+  const imageAltError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.image.alt`)
+  const isPrivateError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.isPrivate`)
+
   return (
     <div className={style["info-form"]}>
       Story Info
       <label htmlFor={`${FIELD_ID}.title`}>Title</label>
       <input {...register(`${FIELD_ID}.title`, { required: true })} type='text' placeholder='title' className='input' />
-      {errors[`${FIELD_ID}.title`] && <FormErrorMsg errorMessage={FormWarningsHelper.requiredFieldMsg()} />}
+      {titleError && <FormErrorMsg errorMessage={titleError} />}
       <label htmlFor={`${FIELD_ID}.description`}>Description</label>
       <input {...register(`${FIELD_ID}.description`)} type='text' placeholder='description' className='input' />
-      {errors[`${FIELD_ID}.description`] && <FormErrorMsg errorMessage={FormWarningsHelper.requiredFieldMsg()} />}
-      <label htmlFor={`${FIELD_ID}.private`}>Private</label>
-      <select {...register(`${FIELD_ID}.private`)}>
+      {descriptionError && <FormErrorMsg errorMessage={descriptionError} />}
+      <label htmlFor={`${FIELD_ID}.isPrivate`}>Private</label>
+      <select {...register(`${FIELD_ID}.isPrivate`)}>
         <option value='true'>true</option>
         <option value='false'>false</option>
       </select>
-      {errors[`${FIELD_ID}.private`] && <FormErrorMsg errorMessage={FormWarningsHelper.requiredFieldMsg()} />}
+      {isPrivateError && <FormErrorMsg errorMessage={isPrivateError} />}
       <div>
         <label htmlFor={`${FIELD_ID}.image`}>Image</label>
         <input
@@ -38,9 +44,9 @@ function InfoForm() {
           placeholder='image'
           className='input'
         />
-        {errors[`${FIELD_ID}.image.file`] && <FormErrorMsg errorMessage={FormWarningsHelper.requiredFieldMsg()} />}
+        {imageFileError && <FormErrorMsg errorMessage={imageFileError} />}
         <input {...register(`${FIELD_ID}.image.alt`)} type='text' placeholder='image alt' className='input' />
-        {errors[`${FIELD_ID}.image.alt`] && <FormErrorMsg errorMessage={FormWarningsHelper.requiredFieldMsg()} />}
+        {imageAltError && <FormErrorMsg errorMessage={imageAltError} />}
       </div>
     </div>
   )

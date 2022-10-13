@@ -2,6 +2,8 @@ import * as React from "react"
 import { useFormContext } from "react-hook-form"
 
 import { AccordionDefault } from "@/components/AccordionDefault"
+import { FormErrorMsg } from "@/components/FormErrorMsg"
+import { FormUtil } from "@/utils/form-util"
 
 import style from "./style.module.scss"
 
@@ -19,7 +21,12 @@ function NoteForm(props: INoteFormProps) {
 
   const FIELD_ID = `frames.${frameIndex}.notes.${index}`
 
-  const { register } = useFormContext()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
+
+  const noteTextError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.text`)
 
   return (
     <AccordionDefault
@@ -37,6 +44,7 @@ function NoteForm(props: INoteFormProps) {
           placeholder='note'
           className='input disable-resize'
         />
+        {noteTextError && <FormErrorMsg errorMessage={noteTextError} />}
         <div className={style["form-actions"]}>
           <button type='button' onClick={remove} className='red-btn'>
             Remove note

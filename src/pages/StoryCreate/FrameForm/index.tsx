@@ -4,6 +4,8 @@ import { useFieldArray, useFormContext } from "react-hook-form"
 import { AccordionDefault } from "@/components/AccordionDefault"
 import { ParagraphForm } from "@/pages/StoryCreate/ParagraphForm"
 import { NoteForm } from "@/pages/StoryCreate/NoteForm"
+import { FormErrorMsg } from "@/components/FormErrorMsg"
+import { FormUtil } from "@/utils/form-util"
 
 import style from "./style.module.scss"
 
@@ -14,6 +16,10 @@ type IFrameFormProps = {
 
 const DEFAULT_PARAGRAPH: IParagraphCreate = {
   text: "",
+  audio: {
+    file: undefined,
+    alt: "",
+  },
   images: [],
 }
 
@@ -29,7 +35,10 @@ function FrameForm(props: IFrameFormProps) {
 
   const FIELD_ID = `frames.${index}`
 
-  const { register } = useFormContext()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
 
   const {
     fields: paragraphFields,
@@ -47,11 +56,14 @@ function FrameForm(props: IFrameFormProps) {
     name: `${FIELD_ID}.notes`,
   })
 
+  const frameTitleError = FormUtil.getFieldErrorMessage(errors, `${FIELD_ID}.title`)
+
   return (
     <AccordionDefault title={`Frame ${index + 1}`} expanded={expanded} toggleExpanded={toggleExpanded}>
       <div className={style["frame-form"]}>
         <div>
           <input {...register(`${FIELD_ID}.title`)} type='text' placeholder='frame title' className='input' />
+          {frameTitleError && <FormErrorMsg errorMessage={frameTitleError} />}
         </div>
         {paragraphFields.map((frame, i) => (
           <ParagraphForm key={frame.id} frameIndex={index} index={i} remove={() => removeParagraph(i)} />

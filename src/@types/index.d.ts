@@ -109,13 +109,13 @@ declare global {
   // ===
 
   type IMediaCreate = {
-    file?: File
-    alt: string
+    file?: FileList
+    alt?: string
   }
 
   type IParagraphCreate = {
     text: string
-    audio?: IMediaCreate
+    audio: IMediaCreate
     images: Array<IMediaCreate>
   }
 
